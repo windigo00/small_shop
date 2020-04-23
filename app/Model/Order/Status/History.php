@@ -11,5 +11,5 @@ class History extends Model
      *
      * @var string
      */
-    protected $table = 'order_status_history';
+    protected $table = 'order_status_histories';
 }

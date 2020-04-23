@@ -1,11 +1,28 @@
 @extends('layouts.app')
+
+@section('styles')
+<!-- Styles -->
+<link href="{{ asset('css/admin.css') }}" rel="stylesheet">
+
+@endsection
+
+@section('menu')
+    @include('layouts.components.nav', ['links' => 'admin.auth.components.links'])
+    @include('admin.components.nav')
+@endsection
+
 @section('content')
-<div class="flex-center position-ref full-height">
+
+<div id="app">
 
     @yield('menu')
 
-    <div class="content">
+    <main class="py-4">
         @yield('page_content')
-    </div>
+    </main>
 </div>
+
+
+<!-- Scripts -->
+<script src="{{ asset('js/admin.js') }}" defer></script>
 @endsection

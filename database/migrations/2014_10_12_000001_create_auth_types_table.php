@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Model\Auth\Type;
 
-class CreateCustomerCardTypesTable extends Migration
+class CreateAuthTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,18 @@ class CreateCustomerCardTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('customer_card_types', function (Blueprint $table) {
+        Schema::create('auth_types', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('title');
+            $table->string('label');
         });
+
+        foreach (Type::AUTH_TYPES as $idx => $type) {
+            Type::query()->insert([
+                'name'  => $type,
+                'label' => Type::AUTH_LABELS[$idx]
+            ]);
+        }
     }
 
     /**
@@ -27,6 +35,6 @@ class CreateCustomerCardTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('customer_card_types');
+        Schema::dropIfExists('auth_types');
     }
 }

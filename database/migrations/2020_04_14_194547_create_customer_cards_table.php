@@ -15,11 +15,9 @@ class CreateCustomerCardsTable extends Migration
     {
         Schema::create('customer_cards', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
-            $table->unsignedBigInteger('type_id');
+            $table->unsignedBigInteger('card_id')->nullable()->unique();
             $table->unsignedBigInteger('customer_id')->nullable();
-            $table->dateTime('valid_to', 0);
-            $table->foreign('type_id')->references('id')->on('customer_card_types');
+            $table->foreign('card_id')->references('id')->on('cards');
             $table->foreign('customer_id')->references('id')->on('customers');
             $table->timestamps();
         });

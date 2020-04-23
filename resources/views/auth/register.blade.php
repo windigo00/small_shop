@@ -161,7 +161,7 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="address_zip" class="col-md-4 col-form-label text-md-right">{{ __('Zip') }}</label>
+                            <label for="address_zip" class="col-md-4 col-form-label text-md-right">{{ __('Zip/Postal code') }}</label>
 
                             <div class="col-md-6">
                                 <input id="address_zip" type="text" class="form-control @error('address.zip') is-invalid @enderror" name="address[zip]" value="{{ old('address.zip') }}" autocomplete="address[zip]">
@@ -177,7 +177,13 @@
                             <label for="address_country" class="col-md-4 col-form-label text-md-right">{{ __('Country') }}</label>
 
                             <div class="col-md-6">
-                                <input id="address_country" type="text" class="form-control @error('address.country') is-invalid @enderror" name="address[country]" value="{{ old('address.country') }}" autocomplete="address[country]">
+                                <country-list
+                                    id="address_country"
+                                    :list="_country_list"
+                                    name="address[country]"
+                                    value="{{ old('address.country') }}"
+                                    has-error="@error('address.country') 1 @enderror"
+                                />
 
                                 @error('address.country')
                                 <span class="invalid-feedback" role="alert">
@@ -191,7 +197,7 @@
                             <h3>{{ __('Cards') }}</h3>
                         </div>
 
-                        <customer-cards old-cards="{{ old('cards') }}"/>
+                        <customer-cards old-cards="{{ old('cards') }}" old-card-ids="{{ old('card_ids') }}"/>
 
                     </div>
 

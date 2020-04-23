@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Model\Customer;
 
-class CustomerController extends Controller
+class CoooustomerController extends Controller
 {
     /**
      * Login input validation rules
@@ -73,11 +73,12 @@ class CustomerController extends Controller
     {
         $result = $this->guard()->check();
         if ($result) {
-            $customer = $this->guard()->customer();
+            /* @var $customer Customer */
+            $customer = $this->guard()->customer;
             $result = [
                 'id'         => $customer->id,
                 'first_name' => $customer->first_name,
-                'first_name' => $customer->last_name,
+                'last_name'  => $customer->last_name,
                 'email'      => $customer->email
             ];
         }
@@ -89,7 +90,7 @@ class CustomerController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): JsonResponse
     {
         $helpCrtl = app(LoginController::class);
         $attempt = $helpCrtl->logout($request);
@@ -109,7 +110,7 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function register(Request $request)
+    public function register(Request $request): JsonResponse
     {
         $helpCrtl = app(RegisterController::class);
         $attempt = $helpCrtl->register($request);
@@ -125,10 +126,11 @@ class CustomerController extends Controller
     /**
      * Handle user list request.
      *
+     * @throws ValidationException
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function grid(Request $request)
+    public function grid(Request $request): JsonResponse
     {
         if (!Auth::user()->is_admin) {
             throw ValidationException::withMessages(['privilege' => [trans('auth.Access not allowed.')]]);

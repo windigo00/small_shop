@@ -20,9 +20,12 @@
 
         <!-- FA -->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" data-auto-replace-svg="nest"></script>
+        <!-- App resources -->
         <script>
+
             window._locale = '{{ app()->getLocale() }}';
             window._translations = {!! cache('translations') !!};
+            window._country_list = @json(cache('country_list')[app()->getLocale()]);
 
             window._cardCheckRoute = '{{ route('card.check') }}';
 

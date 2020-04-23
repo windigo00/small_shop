@@ -7,9 +7,11 @@ use App\Providers\RouteServiceProvider;
 use App\Model\User;
 use App\Model\Customer;
 use App\Model\Customer\Address;
+use App\Model\Customer\Card;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
@@ -84,37 +86,55 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return User
      */
     protected function create(array $data)
     {
-        $user = User::create([
-            'name' => '*temp_name*',
-            'email' => $data['email'],
-            'password' => Hash::make($data['password']),
-        ]);
+        //!! START TRANSACTION !!!
+        DB::beginTransaction();
+        try {
 
-        $customer = Customer::make([
-            'first_name'    => $data['first_name'],
-            'last_name'     => $data['last_name'],
-            'registered_at' => now(),
-            'phone'         => $data['phone'],
-        ]);
-        $customer->user()->associate($user)->save();
+            $user = User::create([
+                'name' => '*temp_name*',
+                'email' => $data['email'],
+                'password' => Hash::make($data['password']),
+            ]);
 
-        $user->name = strtolower(str_replace(' ', '_', $customer->fullName()));
-        //$user->name = 'customer_' . $customer->id;
-        $user->save();
+            $customer = Customer::make([
+                'first_name'    => $data['first_name'],
+                'last_name'     => $data['last_name'],
+                'registered_at' => now(),
+                'phone'         => $data['phone'],
+            ]);
+            $customer->user()->associate($user)->save();
 
-        $address = Address::make([
-            'street'      => $data['address']['street'],
-            'street_nr'   => $data['address']['street_nr'],
-            'city'        => $data['address']['city'],
-            'zip'         => $data['address']['zip'],
-            'country'     => $data['address']['country'],
-        ]);
-        $address->customer()->associate($customer)->save();
+            $user->name = strtolower(str_replace(' ', '_', $customer->fullName()));
+            //$user->name = 'customer_' . $customer->id;
+            $user->save();
 
-        return $user;
+            $address = Address::make([
+                'street'      => $data['address']['street'],
+                'street_nr'   => $data['address']['street_nr'],
+                'city'        => $data['address']['city'],
+                'zip'         => $data['address']['zip'],
+                'country'     => $data['address']['country'],
+            ]);
+            $address->customer()->associate($customer)->save();
+
+            if ($data['card_ids']) {
+                $card_data = array_map(function(string $item) use ($customer) {
+                    $item *= 1;
+                    return [
+                        'customer_id' => $customer->id,
+                        'card_id'     => $item,
+                    ];
+                }, explode(',', $data['card_ids']));
+                Card::query()->insert($card_data);
+            }
+            DB::commit();
+            return $user;
+        } catch (\Exception $ex) {
+            DB::rollBack();
+        }
     }
 }

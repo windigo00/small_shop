@@ -3,8 +3,11 @@
 namespace App\Model;
 
 use App\Model\User;
-use App\Model\Customer\Card;
+use App\Model\Card;
+use App\Model\Customer\Card as CCard;
+use App\Model\Customer\Address;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
@@ -35,7 +38,7 @@ class Customer extends Model
      */
     public function addresses(): HasMany
     {
-        return $this->hasMany(\App\Model\Customer\Address::class);
+        return $this->hasMany(Address::class);
     }
 
 
@@ -52,11 +55,12 @@ class Customer extends Model
     /**
      * Get customers' cards.
      *
-     * @return HasMany
+     * @return HasManyThrough
      */
-    public function cards(): HasMany
+    public function cards(): HasManyThrough
     {
-        return $this->hasMany(Card::class, 'customer_id', 'id');
+//        return $this->hasMany(Card::class)->using(CCard::class);
+        return $this->hasManyThrough(Card::class, CCard::class, 'customer_id', 'id', 'id', 'card_id');
     }
 
     /**

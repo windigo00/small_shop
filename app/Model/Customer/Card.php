@@ -2,9 +2,9 @@
 
 namespace App\Model\Customer;
 
-use App\Model\Card as ACard;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class Card extends ACard
+class Card extends Pivot
 {
     /**
      * The table associated with the model.
@@ -12,4 +12,6 @@ class Card extends ACard
      * @var string
      */
     protected $table = 'customer_cards';
+
+
 }

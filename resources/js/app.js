@@ -10,6 +10,7 @@ window.Vue = require('vue');
 Vue.mixin(require('./translation'));
 
 import CustomerCards from './components/CustomerCards';
+import CountryList from './components/CountryList';
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -19,7 +20,8 @@ import CustomerCards from './components/CustomerCards';
 const app = new Vue({
     el: '#app',
     components: {
-        CustomerCards
+        CustomerCards,
+        CountryList
     },
 
     data() {

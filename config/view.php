@@ -33,4 +33,6 @@ return [
         realpath(storage_path('framework/views'))
     ),
 
+    'items_per_page' => env('PAGING_PER_PAGE', 10),
+
 ];

@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('status_id');
             $table->foreign('status_id')->references('id')->on('order_statuses');
             $table->unsignedBigInteger('card_id')->nullable();
-            $table->foreign('card_id')->references('id')->on('customer_cards');
+            $table->foreign('card_id')->references('id')->on('cards');
             $table->decimal('price');
             $table->timestamps();
         });
