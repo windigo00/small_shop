@@ -4,6 +4,9 @@ namespace App\Model\Customer;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
+/**
+ *
+ */
 class Card extends Pivot
 {
     /**
@@ -12,6 +15,4 @@ class Card extends Pivot
      * @var string
      */
     protected $table = 'customer_cards';
-
-
 }

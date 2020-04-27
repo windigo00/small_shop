@@ -5,6 +5,17 @@ namespace App\Model\Customer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
+/**
+ * @property int $id
+ * @property string $street
+ * @property string $street_nr
+ * @property string $city
+ * @property string $zip
+ * @property string $country
+ *
+ * @method static Address make(?string[][] $data)
+ * @method static Address create(?string[][] $data)
+ */
 class Address extends Model
 {
     /**
@@ -17,7 +28,7 @@ class Address extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'street',

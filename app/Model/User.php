@@ -12,9 +12,14 @@ use App\Model\Auth\Type as AuthType;
 use App\Model\Auth\UserAuthType;
 
 /**
- * @var Customer customer
+ * @property int $id
+ * @property string $name
+ * @property string $email
+ * @property string $password
+ *
+ * @method static User make(?string[][] $data)
+ * @method static User create(?string[][] $data)
  */
-
 class User extends Authenticatable
 {
     use Notifiable;

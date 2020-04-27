@@ -6,12 +6,14 @@ use Closure;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Auth\Type;
 use Illuminate\Support\Facades\Redirect;
+
 /**
  * Description of Admin
  *
  * @author windigo
  */
-class Admin {
+class Admin
+{
 
     /**
      * Handle an incoming request.
@@ -24,7 +26,7 @@ class Admin {
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::guard()->user()->authRule->name !== Type::AUTH_TYPE_ADMIN) {
+        if (Auth::guard()->user()->authRule->name !== Type::AUTH_TYPE_ADMIN) {
             return Redirect::route('forbidden');
         }
         return $next($request);

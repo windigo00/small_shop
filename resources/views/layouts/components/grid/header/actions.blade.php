@@ -1,11 +1,23 @@
-<div class="btn-group" role="group">
+<!--<div class="btn-group" role="group">-->
     @foreach ($actions as $action_name => $action)
-    <button
-        class="btn btn-sm btn-outline-{{ $action['color'] }}"
+    <a
+        class="link text-{{ $action['color'] }}"
         title="{{ __(ucfirst($action_name)) }}"
-        @click="{{ __($action_name) }}Item('{{ $action['route']($row) }}')"
-        >
+        @if (isset($action['confirm']))
+            @click="{!! $action['confirm']($row) !!}"
+            @if ($action['route'] instanceof Closure)
+            route="{{ $action['route']($row) }}"
+            @else
+            route="{{ $column->route($action['route']['route_name'], $action['route']['attrs'], $row) }}"
+            @endif
+            href="#"
+        @elseif ($action['route'] instanceof Closure)
+            href="{{ $action['route']($row) }}"
+        @else
+            href="{{ $column->route($action['route']['route_name'], $action['route']['attrs'], $row) }}"
+        @endif
+    >
         <i class="fas fa-{{ $action['icon'] }}"></i>
-    </button>
+    </a>
     @endforeach
-</div>
+<!--</div>-->

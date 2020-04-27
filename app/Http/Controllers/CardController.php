@@ -11,7 +11,8 @@ use App\Repositories\CustomerCardRepository;
  *
  * @author windigo
  */
-class CardController extends Controller {
+class CardController extends Controller
+{
 
     /**
      *
@@ -29,10 +30,11 @@ class CardController extends Controller {
     /**
      * Check card status for registration by number
      *
-     * @param Card $card_number
+     * @param string $card_number
      * @return \Illuminate\Http\Response
      */
-    public function check(string $card_number = ''): \Illuminate\Http\Response {
+    public function check(string $card_number = ''): \Illuminate\Http\Response
+    {
         $response = ['checked' => false];
         if (empty($card_number)) {
             return response($response);
@@ -44,5 +46,4 @@ class CardController extends Controller {
         }
         return response($response);
     }
-
 }

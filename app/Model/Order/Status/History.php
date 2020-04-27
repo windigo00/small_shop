@@ -4,6 +4,18 @@ namespace App\Model\Order\Status;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Description
+ *
+ * @author windigo
+ *
+ * @property int $id
+ * @property int $order_id
+ * @property int $user_id
+ *
+ * @method static History make(?string[][] $data)
+ * @method static History create(?string[][] $data)
+ */
 class History extends Model
 {
     /**

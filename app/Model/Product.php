@@ -4,6 +4,15 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $title
+ * @property string $seo_name
+ * @property float $price
+ *
+ * @method static Product make(?string[][] $data)
+ * @method static Product create(?string[][] $data)
+ */
 class Product extends Model
 {
     /**
@@ -12,4 +21,13 @@ class Product extends Model
      * @var string
      */
     protected $table = 'products';
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var string[]
+     */
+    protected $fillable = [
+        'title', 'seo_name', 'price'
+    ];
 }

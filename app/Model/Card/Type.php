@@ -4,6 +4,13 @@ namespace App\Model\Card;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property string $label
+ * @property string $name
+ *
+ * @method static Type make(?string[][] $data)
+ * @method static Type create(?string[][] $data)
+ */
 class Type extends Model
 {
     const TYPE_NAMES = [
@@ -21,6 +28,9 @@ class Type extends Model
      * @var string
      */
     protected $table = 'card_types';
+    /**
+     *
+     * @var bool
+     */
     public $timestamps = false;
-
 }

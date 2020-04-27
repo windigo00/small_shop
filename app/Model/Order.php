@@ -14,6 +14,17 @@ use App\Model\Customer;
 use App\Model\Order\Status;
 use App\Model\Order\Status\History;
 
+/**
+ * @property int $id
+ * @property string $order_nr
+ * @property int $customer_id
+ * @property int $status_id
+ * @property ?int $card_id
+ * @property float $price
+ *
+ * @method static Order make(?string[][] $data)
+ * @method static Order create(?string[][] $data)
+ */
 class Order extends Model
 {
     /**

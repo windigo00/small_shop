@@ -4,20 +4,53 @@ namespace App\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Model\Card;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Providers\Grid\Columns;
+use Illuminate\Http\Request;
 
-class CardRepository implements RepositoryInterface
+class CardRepository extends AbstractRepository
 {
-
-    public function create(array $modelData = array()): Model {
-
+    public function __construct(Card $model)
+    {
+        parent::__construct($model);
     }
 
-    public function delete(int $id): void {
-
+    /**
+     *
+     * @param string[] $modelData
+     * @return Model
+     */
+    public function create(array $modelData = []): Model
+    {
+        return app(Card::class, $modelData)->create();
     }
-
-    public function update(array $modelData = array()): Model {
-
+    /**
+     *
+     * @param int $id
+     * @return void
+     */
+    public function delete(int $id): void
+    {
+        Card::findOrFail($id)->delete();
     }
-
+    /**
+     *
+     * @param string[] $modelData
+     * @return Model
+     */
+    public function update(array $modelData = []): Model
+    {
+        return app(Card::class, $modelData)->create();
+    }
+    /**
+     *
+     * @param Request $request
+     * @param string[] $with
+     * @param Columns|null $columns
+     * @return LengthAwarePaginator
+     */
+    public function getPage(Request $request, array $with = [], Columns $columns = null): LengthAwarePaginator
+    {
+        return parent::getPage($request, $with, $columns);
+    }
 }

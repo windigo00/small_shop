@@ -16,7 +16,7 @@ class CustomerCardSeeder extends Seeder
     {
         Customer::all()
             ->random(5)
-            ->each(function(Customer $c) {
+            ->each(function (Customer $c) {
                 factory(CCard::class)->create([
                     'card_id' => factory(Card::class)->create()->id,
                     'customer_id' => $c->id

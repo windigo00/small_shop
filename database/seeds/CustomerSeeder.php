@@ -12,21 +12,22 @@ use App\Model\Card;
 use App\Model\Auth\Type;
 use App\Model\Auth\UserAuthType;
 
-class CustomerSeeder extends Seeder {
+class CustomerSeeder extends Seeder
+{
 
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run(): void {
+    public function run(): void
+    {
         /* @var $customerType Type  */
         $customerType = Type::query()->where('name', '=', Type::AUTH_TYPE_CUSTOMER)->first();
 
         factory(User::class, 5)
             ->create()
-            ->each(function(User $u) use ($customerType) {
-
+            ->each(function (User $u) use ($customerType) {
                 UserAuthType::query()->insert([
                     'user_id' => $u->id,
                     'type_id' => $customerType->id
@@ -38,7 +39,7 @@ class CustomerSeeder extends Seeder {
                 $c->save();
                 factory(Address::class, 2)
                     ->make()
-                    ->each(function(Address $address) use ($c) {
+                    ->each(function (Address $address) use ($c) {
                         $c->addresses()->save($address);
                     });
 
@@ -49,8 +50,6 @@ class CustomerSeeder extends Seeder {
 //                    ->each(function(Card $card) use ($c) {
 //                        $c->cards()->attach($card);
 //                    });
-
             });
     }
-
 }

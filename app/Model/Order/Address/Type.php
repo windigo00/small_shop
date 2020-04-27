@@ -7,9 +7,16 @@ use Illuminate\Database\Eloquent\Model;
  * Description of Type
  *
  * @author windigo
+ *
+ * @property int $id
+ * @property string $label
+ * @property string $name
+ *
+ * @method static Type make(?string[][] $data)
+ * @method static Type create(?string[][] $data)
  */
-class Type  extends Model {
-
+class Type extends Model
+{
     const ADDRESS_TYPE_INVOICE  = 'invoice';
     const ADDRESS_TYPE_DELIVERY = 'delivery';
     const ADDRESS_LABEL_INVOICE  = 'Invoice Address';

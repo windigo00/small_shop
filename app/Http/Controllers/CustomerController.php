@@ -159,5 +159,4 @@ class CoooustomerController extends Controller
     {
         return Auth::guard();
     }
-
 }

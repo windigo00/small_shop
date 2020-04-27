@@ -5,13 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\Customer;
+use Illuminate\View\View;
 
 class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -22,18 +22,19 @@ class ProfileController extends Controller
      * Show the profile for the given user.
      *
      * @param Customer $customer
-     * @return type
+     * @return View
      */
-    public function show(Customer $customer)
+    public function show(Customer $customer): View
     {
         return view('front.profile', ['customer' => $customer]);
     }
     /**
      * Show the profile for the given user.
      *
-     * @return type
+     * @param Customer $customer
+     * @return View
      */
-    public function index(Customer $customer)
+    public function index(Customer $customer): View
     {
         return view('front.profile.index', ['customer' => $customer]);
     }

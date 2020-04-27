@@ -3,7 +3,17 @@
 namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonInterface;
 
+/**
+ * @property int $id
+ * @property string $number
+ * @property int $type_id
+ * @property CarbonInterface $valid_to
+ *
+ * @method static Card make(?string[][] $data)
+ * @method static Card create(?string[][] $data)
+ */
 class Card extends Model
 {
     /**
@@ -16,10 +26,9 @@ class Card extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'number', 'type_id', 'valid_to'
     ];
-
 }

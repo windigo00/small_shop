@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
+//sleep(5);
 /*
 |--------------------------------------------------------------------------
 | Admin Routes

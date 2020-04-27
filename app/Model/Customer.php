@@ -6,12 +6,25 @@ use App\Model\User;
 use App\Model\Card;
 use App\Model\Customer\Card as CCard;
 use App\Model\Customer\Address;
+use App\Model\Order;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\CarbonInterface;
 
-
+/**
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property CarbonInterface $registered_at
+ * @property string $email
+ * @property string $phone
+ *
+ * @method static Customer make(?string[][] $data)
+ * @method static Customer create(?string[][] $data)
+ */
 class Customer extends Model
 {
     /**
@@ -25,7 +38,7 @@ class Customer extends Model
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'first_name', 'last_name', 'registered_at', 'phone'
@@ -39,6 +52,15 @@ class Customer extends Model
     public function addresses(): HasMany
     {
         return $this->hasMany(Address::class);
+    }
+    /**
+     * Get the orders for customer.
+     *
+     * @return HasMany
+     */
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
     }
 
 
@@ -59,7 +81,6 @@ class Customer extends Model
      */
     public function cards(): HasManyThrough
     {
-//        return $this->hasMany(Card::class)->using(CCard::class);
         return $this->hasManyThrough(Card::class, CCard::class, 'customer_id', 'id', 'id', 'card_id');
     }
 
@@ -71,7 +92,4 @@ class Customer extends Model
     {
         return $this->first_name . ' ' . $this->last_name;
     }
-
-
-
 }

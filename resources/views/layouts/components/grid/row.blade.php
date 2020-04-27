@@ -3,7 +3,7 @@
         <?php $column_name = $column->getName(); ?>
         @switch($column_name)
             @case('action')
-    <td>@include('layouts.components.grid.header.actions', ['actions' => $actions, 'row' => $row])</td>
+    <td>@include('layouts.components.grid.header.actions', ['actions' => $actions, 'row' => $row, 'column' => $column])</td>
             @break
 
             @case('id')

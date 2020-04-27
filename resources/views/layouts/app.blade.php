@@ -24,8 +24,8 @@
         <script>
 
             window._locale = '{{ app()->getLocale() }}';
-            window._translations = {!! cache('translations') !!};
-            window._country_list = @json(cache('country_list')[app()->getLocale()]);
+//            window._translations = {!! cache('translations') !!};
+            window._country_list = []; //@ json(cache('country_list')[app()->getLocale()]);
 
             window._cardCheckRoute = '{{ route('card.check') }}';
 

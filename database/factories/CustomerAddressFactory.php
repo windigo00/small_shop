@@ -6,7 +6,6 @@ use App\Model\Customer\Address;
 use Faker\Generator as Faker;
 
 $factory->define(Address::class, function (Faker $faker) {
-
     $countries = cache('country_list')[app()->getLocale()];
     $key_idx = random_int(0, count($countries)-1);
     $key = array_keys($countries)[$key_idx];

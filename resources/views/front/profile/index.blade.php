@@ -42,7 +42,7 @@
 <!--                                        {{ __('Zip/Postal code') }}:&nbsp;-->
                                         {{ $address->zip }}<br>
 <!--                                        {{ __('Country') }}:&nbsp;-->
-                                        {{ cache('country_list')[app()->getLocale()][$address->country] }}
+                                        {{-- cache('country_list')[app()->getLocale()][$address->country] --}}
                                     </address>
                                 </li>
                                 @empty

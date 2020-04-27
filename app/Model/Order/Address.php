@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
  * Description of Address
  *
  * @author windigo
+ *
  */
 class Address extends Pivot
 {

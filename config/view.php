@@ -34,5 +34,6 @@ return [
     ),
 
     'items_per_page' => env('PAGING_PER_PAGE', 10),
+    'sort_attribute' => env('SORT_ATTRIBUTE', 'sort'),
 
 ];

@@ -13,7 +13,8 @@ namespace App\Providers;
  *
  * @author windigo
  */
-class FilteredOrderedPaginatorServiceProvider extends \Illuminate\Pagination\PaginationServiceProvider {
+class FilteredOrderedPaginatorServiceProvider extends \Illuminate\Pagination\PaginationServiceProvider
+{
     /**
      * Register the service provider.
      *
@@ -22,6 +23,5 @@ class FilteredOrderedPaginatorServiceProvider extends \Illuminate\Pagination\Pag
     public function register()
     {
         parent::register();
-        
     }
 }

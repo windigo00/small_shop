@@ -1,10 +1,9 @@
 <?php
 namespace App\Providers;
 
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;
+use App\Providers\Translation\Translator;
+use App\Providers\Translation\Loader;
 
 /**
  * Description of TranslationServiceProvider
@@ -20,39 +19,52 @@ class TranslationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Cache::rememberForever('translations', function () {
-            $translations = collect();
+        $this->app->instance('path.locale', $this->localePath());
 
-            foreach (['en', 'cs'] as $locale) { // suported locales
-                $translations[$locale] = [
-                    'php' => $this->phpTranslations($locale),
-                    'json' => $this->jsonTranslations($locale),
-                ];
-            }
+        $this->registerLoader();
 
-            return $translations;
+        $this->app->singleton('translator', function ($app) {
+            $loader = $app['translation.loader'];
+
+            $locale = $app['config']['app.locale'];
+
+            $trans = new Translator($loader, $locale);
+
+            $trans->setFallback($app['config']['app.fallback_locale']);
+
+            return $trans;
         });
     }
 
-    private function phpTranslations($locale)
+    /**
+     * Register the translation line loader.
+     *
+     * @return void
+     */
+    protected function registerLoader()
     {
-        $path = resource_path("lang/$locale");
-
-        return collect(File::allFiles($path))->flatMap(function ($file) use ($locale) {
-            $key = ($translation = $file->getBasename('.php'));
-
-            return [$key => trans($translation, [], $locale)];
+        $this->app->singleton('translation.loader', function ($app) {
+            return new Loader($app['files'], $app['path.locale']);
         });
     }
 
-    private function jsonTranslations($locale)
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
     {
-        $path = resource_path("lang/$locale.json");
+        return ['translator', 'translation.loader'];
+    }
 
-        if (is_string($path) && is_readable($path)) {
-            return json_decode(file_get_contents($path), true);
-        }
-
-        return [];
+    /**
+     * Get the path to the language files.
+     *
+     * @return string
+     */
+    public function localePath(): string
+    {
+        return $this->app->resourcePath().DIRECTORY_SEPARATOR.'locale';
     }
 }

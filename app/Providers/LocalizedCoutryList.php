@@ -26,15 +26,15 @@ class LocalizedCoutryList extends ServiceProvider
      */
     public function boot()
     {
-        Cache::rememberForever('country_list', function () {
-            $list = collect();
-
-            foreach (['en', 'cs'] as $locale) { // suported locales
-                $list[$locale] = $this->phpList($locale);
-            }
-
-            return $list;
-        });
+//        Cache::rememberForever('country_list', function () {
+//            $list = collect();
+//
+//            foreach (['en', 'cs'] as $locale) { // suported locales
+//                $list[$locale] = $this->phpList($locale);
+//            }
+//
+//            return $list;
+//        });
     }
 
     private function phpList($locale)

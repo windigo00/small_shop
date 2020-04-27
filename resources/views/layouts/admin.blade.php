@@ -20,6 +20,11 @@
     <main class="py-4">
         @yield('page_content')
     </main>
+
+    <div id="mask">
+        <div class="background bg-light"></div>
+        <i class="fas fa-spin fa-cog text-primary fa-10x"></i>
+    </div>
 </div>
 
 

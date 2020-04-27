@@ -7,9 +7,15 @@ use Illuminate\Database\Eloquent\Model;
  * Description of Type
  *
  * @author windigo
+ *
+ * @property string $label
+ * @property string $name
+ *
+ * @method static Type make(?string[][] $data)
+ * @method static Type create(?string[][] $data)
  */
-class Type extends Model {
-
+class Type extends Model
+{
     const AUTH_TYPE_GUEST    = 'guest';
     const AUTH_TYPE_CUSTOMER = 'customer';
     const AUTH_TYPE_ADMIN    = 'admin';
@@ -39,7 +45,7 @@ class Type extends Model {
     /**
      * The attributes that are mass assignable.
      *
-     * @var array
+     * @var string[]
      */
     protected $fillable = [
         'name', 'label'

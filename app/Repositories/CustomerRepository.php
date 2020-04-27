@@ -6,23 +6,34 @@ use Illuminate\Database\Eloquent\Model;
 use App\Model\Customer;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use App\Providers\Grid\Columns;
 
 class CustomerRepository extends AbstractRepository
 {
-    protected $model_class = Customer::class;
-    public function create(array $modelData = array()): Model {
-
+    public function __construct(Customer $model)
+    {
+        parent::__construct($model);
+    }
+    public function create(array $modelData = array()): Customer
+    {
     }
 
-    public function delete(int $id): void {
-
+    public function delete(int $id): void
+    {
     }
 
-    public function update(array $modelData = array()): Model {
-
+    public function update(array $modelData = array()): Customer
+    {
     }
-
-    public function getPage(Request $request, array $with = []): LengthAwarePaginator {
-        return parent::getPage($request, array_merge(['user'], $with));
+    /**
+     *
+     * @param Request $request
+     * @param string[] $with
+     * @param Columns|null $columns
+     * @return LengthAwarePaginator
+     */
+    public function getPage(Request $request, array $with = [], ?Columns $columns = null): LengthAwarePaginator
+    {
+        return parent::getPage($request, array_merge(['user'], $with), $columns);
     }
 }

@@ -1,15 +1,18 @@
 <table class="table table-striped table-bordered table-hover table-sm">
     <thead>
-        @include('layouts.components.grid.header', ['columns' => $columns])
+        @include('layouts.components.grid.header', ['columns' => $container->getColumns()])
     </thead>
     <tbody>
-        @forelse ($items as $item)
-            @include('layouts.components.grid.row', ['columns' => $columns, 'row' => $item])
+        @forelse ($container->getItems() as $item)
+            @include('layouts.components.grid.row', ['columns' => $container->getColumns(), 'row' => $item, 'actions' => $container->getActions()])
         @empty
         <tr>
-            <th scope="row" colspan="{{ count($columns) }}">No Items</th>
+            <th scope="row" colspan="{{ count($container->getColumns()) }}">No Items</th>
         </tr>
         @endforelse
     </tbody>
 </table>
-{{ $items->onEachSide(1)->appends(['sort' => 'votes'])->links('layouts.components.paging') }}
+<modal-form name="confirmForm" title="{{ __('Are You Sure?!?') }}">
+    <h1>{{ __('Are You Sure?!?') }}</h1>
+</modal-form>
+{{ $container->getItems()->onEachSide(1)->links('layouts.components.paging') }}

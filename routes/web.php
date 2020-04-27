@@ -26,17 +26,14 @@ Auth::routes();
 
 //user detail
 Route::prefix('profile')->group(function () {
-
-    Route::get('/{user:name?}', function(ProfileController $ctrl, User $user = null) {
+    Route::get('/{user:name?}', function (ProfileController $ctrl, User $user = null) {
         if (!$user && Auth::user()) {
             return $ctrl->index(Auth::user()->customer);
-
         }
         if ($user) {
             return $ctrl->show($user->customer);
         }
     });
-
 });
 
 Route::post('card/{card_number?}', 'CardController@check')->name('card.check');

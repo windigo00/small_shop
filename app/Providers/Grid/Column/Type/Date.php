@@ -3,13 +3,15 @@
 namespace App\Providers\Grid\Column\Type;
 
 use App\Providers\Grid\Column\Type;
+use Illuminate\Support\Carbon;
+
 /**
  * Description of Number
  *
  * @author windigo
  */
-class Date extends Type {
-
+class Date extends Type
+{
     protected $type_name = 'number';
 
     /**
@@ -17,9 +19,17 @@ class Date extends Type {
      * @param \DateTime $value
      * @return string|null
      */
-    public function render($value): ?string {
+    public function render($value): ?string
+    {
         $value = parent::render($value);
-        return $value instanceof \Illuminate\Support\Carbon ? $value->toDayDateTimeString() : '';
-    }
 
+        if (!$value) {
+            return '-';
+        }
+        if (!($value instanceof Carbon)) {
+            $value = Carbon::parse($value);
+        }
+
+        return $value->toDayDateTimeString();
+    }
 }

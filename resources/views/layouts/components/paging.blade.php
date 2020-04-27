@@ -41,6 +41,14 @@
                     <span class="page-link" aria-hidden="true">@lang('pagination.next')</span>
                 </li>
             @endif
+
+            <li class="page-item">
+                <a href="#" class="page-link bg-primary text-white dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" >Per page</a>
+                <div class="dropdown-menu" >
+                    <a class="dropdown-item" href="#">Dropdown link</a>
+                    <a class="dropdown-item" href="#">Dropdown link</a>
+                </div>
+            </li>
         </ul>
     </nav>
 @endif

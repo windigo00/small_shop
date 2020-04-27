@@ -23,13 +23,13 @@ class OrderSeeder extends Seeder
 
         factory(Order::class, 20)
             ->create()
-            ->each(function(Order $o) use ($customers) {
+            ->each(function (Order $o) use ($customers) {
                 $sum = 0;
                 /* @var $c Customer */
                 $c = $customers->random(1)->first();
                 factory(Item::class, 2)
                     ->make()
-                    ->each(function(Item $item) use ($o, $sum) {
+                    ->each(function (Item $item) use ($o, $sum) {
                         $sum += $item->price;
                         $o->items()->save($item);
                     });
@@ -47,8 +47,6 @@ class OrderSeeder extends Seeder
                     'address_id' => $c->addresses[0]->id,
                     'address_type_id' => OAddressType::query()->where('name', '=', OAddressType::ADDRESS_TYPE_DELIVERY)->first()->id
                 ]);
-
-
             });
     }
 }

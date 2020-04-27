@@ -4,6 +4,14 @@ namespace App\Model\Order;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property int $id
+ * @property string $label
+ * @property string $name
+ *
+ * @method static Model make()
+ * @method static Model create()
+ */
 class Status extends Model
 {
     const STATUS_NAME_NEW       = 'new';

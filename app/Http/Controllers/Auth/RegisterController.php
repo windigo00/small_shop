@@ -12,6 +12,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Contracts\Validation\Validator as CValidator;
 
 class RegisterController extends Controller
 {
@@ -33,11 +34,11 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    protected string $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Login input validation rules
-     * @var array
+     * @var string[]
      */
     protected static $loginValidation = [
         'email'     => 'required|string',
@@ -45,7 +46,7 @@ class RegisterController extends Controller
     ];
     /**
      * Registration input validation rules
-     * @var array
+     * @var string[][]
      */
     protected static $regValidation = [
         'first_name'=> ['required', 'string', 'max:255'],
@@ -64,7 +65,6 @@ class RegisterController extends Controller
     /**
      * Create a new controller instance.
      *
-     * @return void
      */
     public function __construct()
     {
@@ -75,9 +75,9 @@ class RegisterController extends Controller
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @return CValidator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): CValidator
     {
         return Validator::make($data, self::$regValidation);
     }
@@ -85,15 +85,14 @@ class RegisterController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
-     * @return User
+     * @param string[][] $data
+     * @return User|null
      */
-    protected function create(array $data)
+    protected function create(array $data): ?User
     {
         //!! START TRANSACTION !!!
         DB::beginTransaction();
         try {
-
             $user = User::create([
                 'name' => '*temp_name*',
                 'email' => $data['email'],
@@ -122,8 +121,8 @@ class RegisterController extends Controller
             $address->customer()->associate($customer)->save();
 
             if ($data['card_ids']) {
-                $card_data = array_map(function(string $item) use ($customer) {
-                    $item *= 1;
+                $card_data = array_map(function (string $item) use ($customer) {
+                    $item = intval($item);
                     return [
                         'customer_id' => $customer->id,
                         'card_id'     => $item,
@@ -136,5 +135,6 @@ class RegisterController extends Controller
         } catch (\Exception $ex) {
             DB::rollBack();
         }
+        return null;
     }
 }
