@@ -2,7 +2,7 @@
     <div>
         <span
             :class="checkStatus"
-            :title="__((value ? '' : 'Not ')+'Valid')"
+            :title="(value ? '' : 'Not ')+'Valid' | translate"
         >
             <i :class="checkStatusIcon"/>
         </span>

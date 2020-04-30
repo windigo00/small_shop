@@ -37,16 +37,26 @@ class Loader
         $this->path = $path;
         $this->files = $files;
     }
+    /**
+     * Get paths of the locale files
+     *
+     * @param string $locale
+     * @return string[]|null
+     */
+    protected function getPaths(string $locale): ?array {
+
+    }
 
     public function load($locale, $fallback_locale): array
     {
         $files = $this->files->glob($this->getPath($locale));
-        if (empty($files)) {
-            $files = $this->files->glob($this->getPath($fallback_locale));
-        }
+//        if (empty($files)) {
+//            $files = $this->files->glob($this->getPath($fallback_locale));
+//        }
 
         if (!empty($files)) {
             $ret = [];
+            $struct = [];//structured with file names
             foreach ($files as $file) {
                 if ($f = fopen($file, 'r')) {
                     while ($line = fgetcsv($f)) {

@@ -33,6 +33,16 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
         });
     });
 
+    Route::prefix('system')->name('system.')->group(function () {
+        // overview
+//        Route::get('/', 'System\ConfigController@index')->name('index');
+
+        Route::resources([
+            'settings' => 'System\ConfigController',
+            'locale' => 'System\LocaleController',
+        ]);
+    });
+
 
 //    Route::resource('user', \App\Http\Controllers\User\UserController, [ 'only' => [ 'update', 'destroy' ] ]);
 
@@ -42,3 +52,4 @@ Route::prefix('admin')->middleware('admin')->name('admin.')->group(function () {
 //        })->name('customer.grid');
 //    });
 });
+

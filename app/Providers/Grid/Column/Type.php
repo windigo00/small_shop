@@ -21,10 +21,10 @@ abstract class Type
         return app('\\'. __NAMESPACE__ .'\\Type\\'. ucfirst($type_name));
     }
 
-    public function render($value)
+    public function render($value, \Illuminate\Database\Eloquent\Model $row)
     {
         if ($this->renderer !== null) {
-            $value = $this->renderer->call($this, $value);
+            $value = $this->renderer->call($this, $value, $row);
         }
         return $value;
     }

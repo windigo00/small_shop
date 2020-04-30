@@ -59,7 +59,7 @@ class CoooustomerController extends Controller
         if ($attempt) {
             return response()->json([
                 'token'     => csrf_token(),
-                'message'   => trans('auth.success'),
+                'message'   => __('auth.success'),
             ]);
         }
     }
@@ -99,7 +99,7 @@ class CoooustomerController extends Controller
             $request->session()->regenerateToken();
             return response()->json([
                 'token'     => csrf_token(),
-                'message'   => trans('auth.Logout successful'),
+                'message'   => __('auth.Logout successful'),
             ]);
         }
     }
@@ -118,7 +118,7 @@ class CoooustomerController extends Controller
         if ($attempt) {
             return response()->json([
                 'token'     => csrf_token(),
-                'message'   => trans('auth.Registration successful'),
+                'message'   => __('auth.Registration successful'),
             ]);
         }
     }
@@ -133,7 +133,7 @@ class CoooustomerController extends Controller
     public function grid(Request $request): JsonResponse
     {
         if (!Auth::user()->is_admin) {
-            throw ValidationException::withMessages(['privilege' => [trans('auth.Access not allowed.')]]);
+            throw ValidationException::withMessages(['privilege' => [__('auth.Access not allowed.')]]);
         }
         $perpage = $request->input('per_page', 5);
         $page = $request->input('page', 0)+1;

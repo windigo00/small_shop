@@ -13,8 +13,8 @@ class Number extends Type
 {
     protected $type_name = 'number';
 
-    public function render($value): ?string
-    {
-        return parent::render($value);
-    }
+//    public function render($value, \Illuminate\Database\Eloquent\Model $row): ?string
+//    {
+//        return parent::render($value);
+//    }
 }

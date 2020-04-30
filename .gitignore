@@ -15,3 +15,4 @@ yarn-error.log
 /public/images/vendor/
 /public/js/app.js.LICENSE.txt
 /public/js/admin.js.LICENSE.txt
+/__dev/

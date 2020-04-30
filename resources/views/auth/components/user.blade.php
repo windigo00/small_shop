@@ -3,5 +3,5 @@
         {{ Auth::user()->name }} <span class="caret"></span>
     </a>
 
-    @include('auth.components.logout')
+    @include('auth.components.logout', ['dropdown_id' => 'navbarDropdown'])
 </li>

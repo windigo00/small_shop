@@ -53,6 +53,7 @@ abstract class AbstractRepository implements RepositoryInterface
                 }
             }
         }
-        return $ret->paginate(config('view.items_per_page'));
+        $pp = config('view.items_per_page');
+        return $ret->paginate($pp != 'All' ? $pp : PHP_INT_MAX);
     }
 }

@@ -19,9 +19,9 @@ class Date extends Type
      * @param \DateTime $value
      * @return string|null
      */
-    public function render($value): ?string
+    public function render($value, \Illuminate\Database\Eloquent\Model $row): ?string
     {
-        $value = parent::render($value);
+        $value = parent::render($value, $row);
 
         if (!$value) {
             return '-';
@@ -30,6 +30,6 @@ class Date extends Type
             $value = Carbon::parse($value);
         }
 
-        return $value->toDayDateTimeString();
+        return $value->locale(app()->getLocale())->isoFormat('ll');
     }
 }

@@ -15,16 +15,26 @@ class Product extends Columns
     public function initColumns(): void
     {
         $this->items = [
+            [
+                'name' => 'bulk_action',
+                'label' => '',
+                'type' => Type\Text::class  ,
+                'orderable' => false,
+                'filterable' => false,
+                'enabled_actions' => ['edit', 'delete']
+            ],
             ['name' => 'id',          'label' => '#',              'type' => Type\Number::class],
-            ['name' => 'title',       'label' => trans('Title'),   'type' => Type\Text::class  ],
-            ['name' => 'seo_name',    'label' => trans('SEO'),     'type' => Type\Text::class  ],
-            ['name' => 'price',       'label' => trans('Price'),   'type' => Type\Price::class ],
-            ['name' => 'created_at',  'label' => trans('Created'), 'type' => Type\Date::class  ],
-            ['name' => 'updated_at',  'label' => trans('Updated'), 'type' => Type\Date::class  ],
-            ['name' => 'action',      'label' => trans('Action'),  'type' => Type\Text::class  , 'orderable' => false, 'filterable' => false],
+            ['name' => 'title',       'label' => __('Title'),   'type' => Type\Text::class  , 'render' => function ($value, \App\Model\Product $row) {
+                return __('link', ['route' => route('admin.products.show', ['product' => $row]), 'label' => $value]);
+            }],
+            ['name' => 'seo_name',    'label' => __('SEO'),     'type' => Type\Text::class  ],
+            ['name' => 'price',       'label' => __('Price'),   'type' => Type\Price::class ],
+            ['name' => 'created_at',  'label' => __('Created'), 'type' => Type\Date::class  ],
+            ['name' => 'updated_at',  'label' => __('Updated'), 'type' => Type\Date::class  ],
+            ['name' => 'action',      'label' => __('Action'),  'type' => Type\Text::class  , 'orderable' => false, 'filterable' => false],
         ];
 
-        $deleteQuestion = trans('Are you sure?');
+        $deleteQuestion = __('Are you sure?');
 
         $this->actions = [
             'edit'   => [
@@ -34,7 +44,7 @@ class Product extends Columns
             ],
             'delete' => [
                 'color' => 'danger',
-                'icon' => 'times',
+                'icon' => 'trash',
                 'route' => ['route_name' => 'admin.products.destroy', 'attrs' => ['product']],
                 'confirm' => function (Eloquent\Model $item) use ($deleteQuestion) {
                     return "deleteItem('{$deleteQuestion}', {$item->id}, 'confirmForm')";

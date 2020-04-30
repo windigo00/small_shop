@@ -16,16 +16,26 @@ class User extends Columns
     public function initColumns(): void
     {
         $this->items = [
+            [
+                'name' => 'bulk_action',
+                'label' => '',
+                'type' => Type\Text::class  ,
+                'orderable' => false,
+                'filterable' => false,
+                'enabled_actions' => ['edit', 'delete']
+            ],
             ['name' => 'id',                'label' => '#',              'type' => Type\Number::class],
-            ['name' => 'name',              'label' => trans('Name'),    'type' => Type\Text::class  ],
-            ['name' => 'email',             'label' => trans('E-mail'),  'type' => Type\Text::class  ],
-            ['name' => 'email_verified_at', 'label' => trans('Verified'),'type' => Type\Date::class  ],
-            ['name' => 'authRule',          'label' => trans('Rule'),    'type' => Type\Text::class  , 'orderColumn' => 'authRule.label', 'render' => function (AuthType $value = null) {
+            ['name' => 'name',              'label' => __('Name'),    'type' => Type\Text::class  , 'render' => function ($value, \App\Model\User $row) {
+                return __('link', ['route' => route('admin.users.show', ['user' => $row]), 'label' => $value]);
+            }],
+            ['name' => 'email',             'label' => __('Email'),  'type' => Type\Text::class   ],
+            ['name' => 'email_verified_at', 'label' => __('Verified'),'type' => Type\Date::class  ],
+            ['name' => 'authRule',          'label' => __('Rule'),    'type' => Type\Text::class  , 'orderColumn' => 'authRule.label', 'render' => function (AuthType $value = null) {
                 return $value ? $value->label : AuthType::AUTH_LABEL_CUSTOMER;
             }],
-            ['name' => 'created_at',        'label' => trans('Created'), 'type' => Type\Date::class  ],
-            ['name' => 'updated_at',        'label' => trans('Updated'), 'type' => Type\Date::class  ],
-            ['name' => 'action',            'label' => trans('Action'),  'type' => Type\Text::class  , 'orderable' => false, 'filterable' => false],
+            ['name' => 'created_at',        'label' => __('Created'), 'type' => Type\Date::class  ],
+            ['name' => 'updated_at',        'label' => __('Updated'), 'type' => Type\Date::class  ],
+            ['name' => 'action',            'label' => __('Action'),  'type' => Type\Text::class  , 'orderable' => false, 'filterable' => false],
         ];
 
         $this->actions = [
@@ -38,7 +48,7 @@ class User extends Columns
             ],
             'delete' => [
                 'color' => 'danger',
-                'icon' => 'times',
+                'icon' => 'trash',
                 'route' => function (Eloquent\Model $item) {
                     return route('admin.users.destroy', ['user' => $item]);
                 },

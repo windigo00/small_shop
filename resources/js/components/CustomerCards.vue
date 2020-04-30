@@ -6,7 +6,7 @@
             v-for="(c, k) in cards"
             :key="'card_'+k"
         >
-            <label :for="'card_'+k" class="col-md-4 col-form-label text-md-right">{{ __('Card') +` #${k+1}` }}</label>
+            <label :for="'card_'+k" class="col-md-4 col-form-label text-md-right">{{ 'Card #%s %1 %d' | translate(k+1) }}</label>
 
             <div class="col-md-6">
                 <div class="input-group">

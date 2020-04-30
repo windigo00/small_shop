@@ -19,40 +19,51 @@ class Customer extends Columns
     {
         $this->items = [
             [
+                'name' => 'bulk_action',
+                'label' => '',
+                'type' => Type\Text::class  ,
+                'orderable' => false,
+                'filterable' => false,
+                'enabled_actions' => ['edit', 'delete']
+            ],
+            [
                 'name' => 'id',
                 'label' => '#',
                 'type' => Type\Number::class
             ],
             [
                 'name' => 'first_name',
-                'label' => trans('First Name'),
+                'label' => __('First Name'),
                 'type' => Type\Text::class
             ],
             [
                 'name' => 'last_name',
-                'label' => trans('Last Name'),
+                'label' => __('Last Name'),
                 'type' => Type\Text::class
             ],
             [
                 'name' => 'name',
-                'label' => trans('Name'),
+                'label' => __('Name'),
                 'type' => Type\Text::class,
                 'orderColumn'  => 'CONCAT(customers.first_name,\' \',customers.last_name)',
                 'selectColumn' => 'CONCAT(customers.first_name,\' \',customers.last_name)',
+                'render' => function ($value, \App\Model\Customer $row) {
+                    return __('link', ['route' => route('admin.customers.show', ['customer' => $row]), 'label' => $value]);
+                }
             ],
             [
                 'name' => 'registered_at',
-                'label' => trans('Registration'),
+                'label' => __('Registration'),
                 'type' => Type\Date::class
             ],
             [
                 'name' => 'phone',
-                'label' => trans('Phone'),
+                'label' => __('Telephone'),
                 'type' => Type\Text::class
             ],
             [
                 'name' => 'user',
-                'label' => trans('E-mail'),
+                'label' => __('Email'),
                 'type' => Type\Text::class,
                 'orderColumn' => 'user.email',
 //                'selectColumn' => 'users.email',
@@ -62,14 +73,14 @@ class Customer extends Columns
             ],
             [
                 'name' => 'orders',
-                'label' => trans('Orders'),
+                'label' => __('Orders'),
                 'type' => Type\Text::class,
                 'orderColumn'  => '(SELECT COUNT(*) FROM orders WHERE customers.id = orders.customer_id)',
                 'selectColumn' => '(SELECT COUNT(*) FROM orders WHERE customers.id = orders.customer_id)',
             ],
             [
                 'name' => 'order_sum',
-                'label' => trans('Ordered'),
+                'label' => __('Ordered'),
                 'type' => Type\Price::class,
                 'orderColumn'  => '(SELECT SUM((SELECT SUM(order_items.price) FROM order_items WHERE orders.id = order_items.order_id)) FROM orders WHERE customers.id = orders.customer_id)',
                 'selectColumn' => '(SELECT SUM((SELECT SUM(order_items.price) FROM order_items WHERE orders.id = order_items.order_id)) FROM orders WHERE customers.id = orders.customer_id)',
@@ -79,24 +90,24 @@ class Customer extends Columns
             ],
             [
                 'name' => 'cards',
-                'label' => trans('Cards'),
+                'label' => __('Gift Cards'),
                 'type' => Type\Text::class,
                 'orderColumn'  => '(SELECT COUNT(*) FROM customer_cards WHERE customers.id = customer_cards.customer_id)',
                 'selectColumn' => '(SELECT COUNT(*) FROM customer_cards WHERE customers.id = customer_cards.customer_id)',
             ],
             [
                 'name' => 'created_at',
-                'label' => trans('Created'),
+                'label' => __('Created'),
                 'type' => Type\Date::class
             ],
             [
                 'name' => 'updated_at',
-                'label' => trans('Last update'),
+                'label' => __('Last Update'),
                 'type' => Type\Date::class
             ],
             [
                 'name' => 'action',
-                'label' => trans('Action'),
+                'label' => __('Action'),
                 'type' => Type\Text::class,
                 'orderable' => false,
                 'filterable' => false
@@ -113,7 +124,7 @@ class Customer extends Columns
             ],
             'delete' => [
                 'color' => 'danger',
-                'icon' => 'times',
+                'icon' => 'trash',
                 'route' => function (Model $item) {
                     return route('admin.customers.destroy', ['customer' => $item]);
                 }

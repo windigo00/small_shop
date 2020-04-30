@@ -163,12 +163,11 @@ class Column
     }
     /**
      *
-     * @param mixed $value
-     * @return string|null
      */
-    public function render($value): ?string
+    public function render(string $column_name, \Illuminate\Database\Eloquent\Model $row): ?string
     {
-        return $this->type->render($value);
+        $value = $row->$column_name;
+        return $this->type->render($value, $row);
     }
 
     /**

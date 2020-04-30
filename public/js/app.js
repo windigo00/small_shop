@@ -39067,9 +39067,9 @@ var render = function() {
         _vm._v(
           "\n        " +
             _vm._s(
-              _vm.currentValue
-                ? _vm.list[_vm.currentValue]
-                : _vm.__("Select country")
+              _vm._f("translate")(
+                _vm.currentValue ? _vm.list[_vm.currentValue] : "Select country"
+              )
             ) +
             "\n    "
         )
@@ -39082,7 +39082,7 @@ var render = function() {
           staticClass: "form-control",
           attrs: {
             type: "search",
-            placeholder: _vm.__("Select country"),
+            placeholder: _vm._f("translate")("Select country"),
             autofocus: "autofocus"
           },
           on: {
@@ -39121,7 +39121,7 @@ var render = function() {
         : _c("div", { staticClass: "dropdown-header" }, [
             _vm._v(
               "\n            " +
-                _vm._s(_vm.__("No results for selection")) +
+                _vm._s(_vm._f("translate")("No results for selection")) +
                 "\n        "
             )
           ])
@@ -39166,7 +39166,7 @@ var render = function() {
               staticClass: "col-md-4 col-form-label text-md-right",
               attrs: { for: "card_" + k }
             },
-            [_vm._v(_vm._s(_vm.__("Card") + " #" + (k + 1)))]
+            [_vm._v(_vm._s(_vm._f("translate")("Card #%s %1 %d", k + 1)))]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-6" }, [
@@ -39274,7 +39274,9 @@ var render = function() {
       "span",
       {
         class: _vm.checkStatus,
-        attrs: { title: _vm.__((_vm.value ? "" : "Not ") + "Valid") }
+        attrs: {
+          title: _vm._f("translate")((_vm.value ? "" : "Not ") + "Valid")
+        }
       },
       [_c("i", { class: _vm.checkStatusIcon })]
     )
@@ -52164,42 +52166,49 @@ __webpack_require__.r(__webpack_exports__);
 /*!*************************************!*\
   !*** ./resources/js/translation.js ***!
   \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-module.exports = {
-  methods: {
-    /**
-     * Translate the given key.
-     */
-    __: function __(key, replace) {
-      var translation,
-          translationNotFound = true;
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
 
-      try {
-        translation = key.split('.').reduce(function (t, i) {
-          return t[i] || null;
-        }, window._translations[window._locale].php);
 
-        if (translation) {
-          translationNotFound = false;
-        }
-      } catch (e) {
-        translation = key;
-      }
 
-      if (translationNotFound) {
-        translation = window._translations[window._locale]['json'][key] ? window._translations[window._locale]['json'][key] : key;
-      }
+var translations = window._translations | function () {
+  var tr = [];
+  return tr;
+}();
 
-      _.forEach(replace, function (value, key) {
-        translation = translation.replace(':' + key, value);
-      });
-
-      return translation;
-    }
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('translate', function () {
+  for (var _len = arguments.length, arr = new Array(_len), _key = 0; _key < _len; _key++) {
+    arr[_key] = arguments[_key];
   }
-};
+
+  //    console.log(arr);
+  //    return arr[0];
+  var key = arr.shift();
+  var translation = translations[key];
+
+  if (!translation) {
+    translation = key;
+  }
+
+  if (arr.length > 0) {
+    return translation.replace(/\%[0-9sd]+/g, function () {
+      if (arr.length > 0) {
+        return arr.shift();
+      }
+
+      return '';
+    });
+  }
+
+  return translation;
+});
 
 /***/ }),
 
@@ -52232,9 +52241,9 @@ module.exports = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! e:\DevData\laravel\customerApp\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! e:\DevData\laravel\customerApp\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! e:\DevData\laravel\customerApp\resources\sass\admin.scss */"./resources/sass/admin.scss");
+__webpack_require__(/*! e:\DevData\laravel\smallShop\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! e:\DevData\laravel\smallShop\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! e:\DevData\laravel\smallShop\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 
 /***/ })

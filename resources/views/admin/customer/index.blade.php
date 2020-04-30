@@ -3,7 +3,7 @@
 @section('page_content')
 <div class="container-fluid">
     <h2>{{ __('Admin Customers') }}</h2>
-    @include('layouts.components.grid', [
+    @include('components.grid', [
         'name'  => 'admin_customer_grid',
         'container' => $customer_grid
     ])

@@ -3,26 +3,32 @@ require('./bootstrap');
 
 
 window.Vue = require('vue');
-//require('../../node_modules/flag-icon-css');
-Vue.mixin(require('./translation'));
+
+require('./translation');
 
 import ModalForm from './components/ModalForm';
+import Grid from './components/Grid';
 
 const app = new Vue({
     el: '#app',
     components: {
-        ModalForm
+        ModalForm,
     },
 
+    mixins: [
+        Grid
+    ],
+
     data() {
-        return {
-        };
+        
     },
 
     mounted() {
         window.addEventListener("beforeunload", () => {
             app.showMask();
         });
+
+
     },
 
     methods: {

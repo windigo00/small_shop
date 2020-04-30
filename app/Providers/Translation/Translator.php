@@ -8,6 +8,7 @@ use Illuminate\Support\Traits\Macroable;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
+use Illuminate\Translation\MessageSelector;
 
 /**
  * Translator
@@ -30,6 +31,12 @@ class Translator implements TranslatorContract
      * @var string
      */
     protected $locale;
+    /**
+     * Array of all locale codes that are enabled
+     *
+     * @var string[]
+     */
+    protected $enabled_locales;
 
     /**
      * The fallback locale used by the translator.
@@ -65,6 +72,39 @@ class Translator implements TranslatorContract
 
         $this->setLocale($locale);
     }
+
+    /**
+     *
+     * @return string[]|null
+     */
+    public function getTranslations(): ?array
+    {
+        $this->load($this->locale);
+        return $this->loaded[$this->locale] ?? null;
+    }
+    /**
+     *
+     * @param string[] $locales
+     * @return void
+     */
+    public function setEnabledLocales(array $locales): void {
+        $this->enabled_locales = $locales;
+    }
+
+    /**
+     * Get the message selector instance.
+     *
+     * @return \Illuminate\Translation\MessageSelector
+     */
+    public function getSelector()
+    {
+        if (! isset($this->selector)) {
+            $this->selector = new MessageSelector;
+        }
+
+        return $this->selector;
+    }
+
     /**
      *
      * @param string $key
@@ -75,7 +115,18 @@ class Translator implements TranslatorContract
      */
     public function choice($key, $number, array $replace = [], $locale = null): string
     {
-        return 'bbbb';
+        $line = $this->get(
+            $key, $replace, $locale
+        );
+        if (is_array($number) || $number instanceof Countable) {
+            $number = count($number);
+        }
+
+        $replace['count'] = $number;
+
+        return $this->makeReplacements(
+            $this->getSelector()->choose($line, $number, $locale), $replace
+        );
     }
     /**
      *
@@ -91,6 +142,9 @@ class Translator implements TranslatorContract
         $this->load($locale);
 
         $line = $this->loaded[$locale][$key] ?? null;
+        if (!$line) {
+            debug("[{$locale}]:{$key}");
+        }
 
         return $this->makeReplacements($line ?: $key, $replace);
     }
@@ -171,12 +225,10 @@ class Translator implements TranslatorContract
     /**
      * Retrieve a language line out the loaded array.
      *
-     * @param  string  $namespace
-     * @param  string  $group
-     * @param  string  $locale
-     * @param  string  $item
-     * @param  array  $replace
-     * @return string|array|null
+     * @param string $locale
+     * @param string $item
+     * @param string[] $replace
+     * @return string|string[]|null
      */
     protected function getLine($locale, $item, array $replace)
     {
@@ -194,15 +246,14 @@ class Translator implements TranslatorContract
             return $line;
         }
     }
-
     /**
      * Make the place-holder replacements on a line.
      *
-     * @param  string  $line
-     * @param  array  $replace
+     * @param  string   $line
+     * @param  string[] $replace
      * @return string
      */
-    protected function makeReplacements($line, array $replace)
+    protected function makeReplacements(string $line, array $replace): string
     {
         if (empty($replace)) {
             return $line;
@@ -224,10 +275,10 @@ class Translator implements TranslatorContract
     /**
      * Sort the replacements array.
      *
-     * @param  array  $replace
-     * @return array
+     * @param  string[]  $replace
+     * @return string[]
      */
-    protected function sortReplacements(array $replace)
+    protected function sortReplacements(array $replace): array
     {
         return (new Collection($replace))->sortBy(function ($value, $key) {
             return mb_strlen($key) * -1;

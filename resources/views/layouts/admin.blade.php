@@ -7,7 +7,7 @@
 @endsection
 
 @section('menu')
-    @include('layouts.components.nav', ['links' => 'admin.auth.components.links'])
+    @include('components.nav', ['links' => 'admin.auth.components.links'])
     @include('admin.components.nav')
 @endsection
 

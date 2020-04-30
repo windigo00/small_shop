@@ -3,6 +3,8 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Session;
+use Config;
 use Illuminate\Support\Facades\Auth;
 use App\Model\Auth\Type;
 use Illuminate\Support\Facades\Redirect;
@@ -24,8 +26,19 @@ class Admin
      *
      * @throws \Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException
      */
-    public function handle($request, Closure $next)
+    public function handle(\Illuminate\Http\Request $request, Closure $next)
     {
+//        debug($request);
+        if ($request->has('perPage')) {
+            $pp = $request->input('perPage', 10);
+            Session::put('items_per_page', $pp == 'All' ? $pp : $pp * 1);
+            return redirect()->back();
+        }
+
+        if (($pp = Session::get('items_per_page')) !== null) {
+            Config::set('view.items_per_page', $pp);
+        }
+
         if (Auth::guard()->user()->authRule->name !== Type::AUTH_TYPE_ADMIN) {
             return Redirect::route('forbidden');
         }

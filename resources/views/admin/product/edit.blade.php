@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title', '- '.__('Admin Product Edit'))
+@section('title', '- '.__('Products Information'))
 @section('page_content')
 <form method="POST" action="{{ route('admin.products.update', $product) }}">
     {{ method_field('PATCH') }}
@@ -9,7 +9,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">{{ __('Product Edit') }}</div>
+                    <div class="card-header">{{ __('Products Information') }}</div>
 
                     <div class="card-body">
 

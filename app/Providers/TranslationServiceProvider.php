@@ -32,8 +32,12 @@ class TranslationServiceProvider extends ServiceProvider
 
             $trans->setFallback($app['config']['app.fallback_locale']);
 
+            $trans->setEnabledLocales($app['config']['app.enabled_locale']);
+
             return $trans;
         });
+
+
     }
 
     /**
@@ -44,7 +48,7 @@ class TranslationServiceProvider extends ServiceProvider
     protected function registerLoader()
     {
         $this->app->singleton('translation.loader', function ($app) {
-            return new Loader($app['files'], $app['path.locale']);
+            return new Loader($app['files'], $app['path.lang']);
         });
     }
 

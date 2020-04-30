@@ -80,8 +80,9 @@ return [
     |
     */
 
-    'locale' => 'cs',
-    'enabled_locale' => ['cs','de','en','es','fr','nl','pt','zh'],
+    'locale' =>  'cs',
+    'enabled_locale' => ['cs','de','en','es','fr','ja','nl','pt','ru','zh'],
+    'locale_codes' => ['cs_CZ','de_DE','en_EU','es_ES','fr_FR','ja_JP','nl_NL','pt_BR','ru_RU','zh_CN'],
 
     /*
     |--------------------------------------------------------------------------

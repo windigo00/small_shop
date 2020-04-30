@@ -1,32 +1,29 @@
-module.exports = {
-    methods: {
-        /**
-         * Translate the given key.
-         */
-        __(key, replace) {
-            let translation, translationNotFound = true
+import Vue from 'vue';
+import axios from 'axios';
 
-            try {
-                translation = key.split('.').reduce((t, i) => t[i] || null, window._translations[window._locale].php)
+var translations = window._translations | (()=>{
+    let tr = [];
+    return tr;
+})();
 
-                if (translation) {
-                    translationNotFound = false
-                }
-            } catch (e) {
-                translation = key
+Vue.filter('translate', (...arr) => {
+//    console.log(arr);
+//    return arr[0];
+
+    let key = arr.shift();
+    let translation = translations[key];
+
+    if (!translation) {
+        translation = key;
+    }
+
+    if (arr.length > 0) {
+        return translation.replace(/\%[0-9sd]+/g, (...items) => {
+            if (arr.length > 0) {
+                return arr.shift();
             }
-
-            if (translationNotFound) {
-                translation = window._translations[window._locale]['json'][key]
-                    ? window._translations[window._locale]['json'][key]
-                    : key
-            }
-
-            _.forEach(replace, (value, key) => {
-                translation = translation.replace(':' + key, value)
-            })
-
-            return translation
-        }
-    },
-}
+            return '';
+        });
+    }
+    return translation;
+});

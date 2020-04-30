@@ -8,14 +8,14 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            {{ currentValue ? list[currentValue] : __('Select country') }}
+            {{ currentValue ? list[currentValue] : 'Select country' | translate }}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <form>
                 <input
                     type="search"
                     class="form-control"
-                    :placeholder="__('Select country')"
+                    :placeholder="'Select country'|translate"
                     autofocus="autofocus"
                     @input="searchTerm = $event.target.value"
                 >
@@ -34,7 +34,7 @@
                 </li>
             </ul>
             <div v-else class="dropdown-header">
-                {{ __('No results for selection') }}
+                {{ 'No results for selection' | translate }}
             </div>
         </div>
     </span>

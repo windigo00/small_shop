@@ -41,3 +41,6 @@ Route::post('card/{card_number?}', 'CardController@check')->name('card.check');
 Route::get('{product:seo_name}', function (Product $product, ProductController $ctrl) {
     return $ctrl->show($product);
 });
+
+// language
+Route::get('locale/set/{locale}', 'System\ConfigController@setLocale')->name('locale.set');
