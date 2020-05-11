@@ -22,6 +22,28 @@
                     }
                 }
                 return false;
+            },
+            allSelected() {
+                $(this.$refs.bulkcheck).prop('indeterminate', this.notAllSelected);
+
+                for(var i in this.items) {
+                    if (this.items[i] === false) {
+                        return false;
+                    }
+                }
+                return true;
+            },
+            notAllSelected() {
+                let a = null;
+                for(var i in this.items) {
+                    if (a === null) {
+                        a = this.items[i];
+                    }
+                    if (this.items[i] !== a) {
+                        return true;
+                    }
+                }
+                return false;
             }
         },
 

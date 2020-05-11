@@ -20,7 +20,12 @@ const app = new Vue({
     ],
 
     data() {
-        
+        return {
+            modalAction: null,
+            modalMessage: Vue.filter('translate')('Are You Sure?!?'),
+            successMessage: null,
+            errorMessage: null,
+        };
     },
 
     mounted() {
@@ -32,20 +37,18 @@ const app = new Vue({
     },
 
     methods: {
-        editItem(item) {
-            console.log(item);
-        },
-
-        deleteItem(message, item, formId) {
-            $('#'+formId).modal().show();
-//            if (window.confirm(message)) {
-//                console.log(item);
-//            }
-        },
-
         showMask() {
             $('#mask').show();
-        }
+        },
+        hideMask() {
+            $('#mask').hide();
+        },
+        showSuccess(message) {
+            this.successMessage = message;
+        },
+        showError(message) {
+            this.errorMessage = message;
+        },
     }
 });
 

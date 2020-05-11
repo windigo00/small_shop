@@ -8,7 +8,7 @@
             aria-haspopup="true"
             aria-expanded="false"
         >
-            {{ currentValue ? list[currentValue] : 'Select country' | translate }}
+            <span v-if="currentValue" :class="'flag-icon flag-icon-'+currentValue.toLowerCase()"></span> {{ currentValue ? list[currentValue] : 'Select country' | translate }}
         </button>
         <div class="dropdown-menu dropdown-menu-right">
             <form>
@@ -30,7 +30,7 @@
                     class="list-group-item"
                     @click="setCountry(k)"
                 >
-                    {{ country }}
+                    <span :class="'flag-icon flag-icon-'+keys[filteredKeys[k]].toLowerCase()"></span> {{ country }}
                 </li>
             </ul>
             <div v-else class="dropdown-header">

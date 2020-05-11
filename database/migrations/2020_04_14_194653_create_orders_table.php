@@ -23,6 +23,8 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('card_id')->nullable();
             $table->foreign('card_id')->references('id')->on('cards');
             $table->decimal('price');
+            $table->unsignedBigInteger('currency_id');
+            $table->foreign('currency_id')->references('id')->on('currencies');
             $table->timestamps();
         });
     }

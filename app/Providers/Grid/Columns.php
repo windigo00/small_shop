@@ -69,12 +69,13 @@ abstract class Columns implements \Countable, \IteratorAggregate
     protected function initNames(Request $request): void
     {
         foreach ($this->items as $idx => $column) {
-            /* @var $column Column */
-            $column = app(Column::class, $column);
+            if (is_array($column)) {
+//                debug(get_class($this) .' `initColumns` is in old array format. consider to change it to factory initiation.');
+                $this->items[$idx] = $column = self::createColumn($column);
+            }
             $column->checkOrder($request->input(config('view.sort_attribute')));
-            $this->items[$idx] = $column;
 
-            $this->names[$idx] = $this->items[$idx]->getName();
+            $this->names[$idx] = $column->getName();
         }
     }
     /**
@@ -104,7 +105,7 @@ abstract class Columns implements \Countable, \IteratorAggregate
         return $this->items;
     }
 
-    public function getColumn(string $name): ?Column
+    public function getColumn(string $name): ?Column\Type
     {
         $key = array_search($name, $this->names);
         if ($key === false) {
@@ -114,4 +115,16 @@ abstract class Columns implements \Countable, \IteratorAggregate
     }
 
     abstract protected function initColumns(): void;
+
+    /**
+     *
+     * @param array $columnConfig
+     * @return Column\Type
+     */
+    public static function createColumn(array $columnConfig): Column\Type
+    {
+        $type = $columnConfig['type'];
+        unset($columnConfig['type']);
+        return app($type, $columnConfig);
+    }
 }

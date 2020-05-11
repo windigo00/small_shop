@@ -14,10 +14,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CardSeeder::class,
+            CurrencySeeder::class,
             CustomerSeeder::class,
 //            CustomerAddressSeeder::class,
             CustomerCardSeeder::class,
-            ProductSeeder::class,
+            \Modules\Core\SmallShop\Catalog\Database\Seeds\ProductSeeder::class,
             OrderSeeder::class,
         ]);
     }

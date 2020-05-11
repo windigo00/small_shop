@@ -4,7 +4,7 @@
 
 use App\Model\Order\Item;
 use Faker\Generator as Faker;
-use App\Model\Product;
+use Modules\Core\SmallShop\Catalog\Model\Product;
 
 $factory->define(Item::class, function (Faker $faker) {
     /* @var $product Product */

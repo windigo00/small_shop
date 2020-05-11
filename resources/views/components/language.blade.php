@@ -11,7 +11,7 @@
     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="langDropdown">
         @foreach ($enabled as $key => $loc)
         <a class="dropdown-item @if($locale == $loc) active @endif" href="{{ route('locale.set', ['locale' => $loc]) }}">
-            <span class="flag-icon flag-icon-{{ strtolower(\Locale::getRegion($codes[$key])) }}"></span> {{ \Locale::getDisplayName($loc, $locale) }}
+            <span class="flag-icon flag-icon-{{ strtolower(\Locale::getRegion($codes[$key])) }}"></span> {{ mb_convert_case(\Locale::getDisplayLanguage($loc, $loc), MB_CASE_TITLE) }}
         </a>
         @endforeach
     </div>

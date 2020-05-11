@@ -6,6 +6,9 @@
         <div class="card-header">&nbsp</div>
         <div class="card-body text-center">
             <h1>{{ __('Access Forbidden') }}</h1>
+            @if(isset($message))
+            <p>{{ $message }}</p>
+            @endif
         </div>
         <div class="card-footer">&nbsp;</div>
     </div>

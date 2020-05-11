@@ -39064,8 +39064,13 @@ var render = function() {
         }
       },
       [
+        _vm.currentValue
+          ? _c("span", {
+              class: "flag-icon flag-icon-" + _vm.currentValue.toLowerCase()
+            })
+          : _vm._e(),
         _vm._v(
-          "\n        " +
+          " " +
             _vm._s(
               _vm._f("translate")(
                 _vm.currentValue ? _vm.list[_vm.currentValue] : "Select country"
@@ -39110,9 +39115,12 @@ var render = function() {
                   }
                 },
                 [
-                  _vm._v(
-                    "\n                " + _vm._s(country) + "\n            "
-                  )
+                  _c("span", {
+                    class:
+                      "flag-icon flag-icon-" +
+                      _vm.keys[_vm.filteredKeys[k]].toLowerCase()
+                  }),
+                  _vm._v(" " + _vm._s(country) + "\n            ")
                 ]
               )
             }),
@@ -52223,10 +52231,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('translate', function () {
 
 /***/ }),
 
-/***/ "./resources/sass/app.scss":
-/*!*********************************!*\
-  !*** ./resources/sass/app.scss ***!
-  \*********************************/
+/***/ "./resources/sass/front.scss":
+/*!***********************************!*\
+  !*** ./resources/sass/front.scss ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -52235,14 +52243,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.filter('translate', function () {
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/admin.scss ***!
-  \*****************************************************************************************/
+/*!*******************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/front.scss ./resources/sass/admin.scss ***!
+  \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(/*! e:\DevData\laravel\smallShop\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! e:\DevData\laravel\smallShop\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! e:\DevData\laravel\smallShop\resources\sass\front.scss */"./resources/sass/front.scss");
 module.exports = __webpack_require__(/*! e:\DevData\laravel\smallShop\resources\sass\admin.scss */"./resources/sass/admin.scss");
 
 

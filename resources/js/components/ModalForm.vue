@@ -13,7 +13,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">{{ 'Close' | translate }}</button>
-                    <button type="button" class="btn btn-primary">{{ 'Confirm' | translate }}</button>
+                    <button type="button" class="btn btn-primary" @click="confirm">{{ 'Confirm' | translate }}</button>
                 </div>
             </div>
         </div>
@@ -31,12 +31,21 @@
             title: {
                 type: String,
                 default: null
+            },
+            message: {
+                type: String,
+                default: null
             }
         },
         data() {
             return {
 
             };
+        },
+        methods: {
+            confirm() {
+                this.$emit('confirm', { formId: this.$el.dataset.formId, id: this.$el.dataset.id });
+            }
         }
     }
 </script>

@@ -6,7 +6,7 @@ use Closure;
 use Session;
 use Config;
 use Illuminate\Support\Facades\Auth;
-use App\Model\Auth\Type;
+use Modules\Core\SmallShop\Customer\Model\Auth\Type;
 use Illuminate\Support\Facades\Redirect;
 
 /**

@@ -10,9 +10,11 @@ use Illuminate\Support\Carbon;
  *
  * @author windigo
  */
-class Date extends Type
+class Date extends Text
 {
     protected $type_name = 'number';
+
+    protected ?string $columnClass = 'text-right';
 
     /**
      *

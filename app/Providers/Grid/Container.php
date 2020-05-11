@@ -49,6 +49,15 @@ class Container
         return $this->columns->getColumns();
     }
 
+    /**
+     * Get array data for json
+     * @return array
+     */
+    public function getColumnData(): array
+    {
+        return array_map(function(Column\Type $item) { return $item->getData(); }, $this->getColumns());
+    }
+
     public function getActions(): ?array
     {
         return $this->columns->getActions();

@@ -6,11 +6,11 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Model\User;
 use App\Model\Customer;
-use App\Model\Customer\Card as CustomerCard;
-use App\Model\Customer\Address;
+use Modules\Core\SmallShop\Customer\Model\Customer\Card as CustomerCard;
+use Modules\Core\SmallShop\Customer\Model\Customer\Address;
 use App\Model\Card;
-use App\Model\Auth\Type;
-use App\Model\Auth\UserAuthType;
+use Modules\Core\SmallShop\Customer\Model\Auth\Type;
+use Modules\Core\SmallShop\Customer\Model\Auth\UserAuthType;
 
 class CustomerSeeder extends Seeder
 {

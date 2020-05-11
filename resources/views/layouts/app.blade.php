@@ -25,10 +25,9 @@
 
             window._locale = '{{ app()->getLocale() }}';
             window._translations = @json(app('translator')->getTranslations());
-            window._country_list = []; //@ json(cache('country_list')[app()->getLocale()]);
-
-            window._cardCheckRoute = '{{ route('card.check') }}';
+            window._country_list = @json(app('locale.country_list')->list(app()->getLocale()));
 
         </script>
+        @yield('scripts')
     </body>
 </html>

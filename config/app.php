@@ -82,7 +82,10 @@ return [
 
     'locale' =>  'cs',
     'enabled_locale' => ['cs','de','en','es','fr','ja','nl','pt','ru','zh'],
-    'locale_codes' => ['cs_CZ','de_DE','en_EU','es_ES','fr_FR','ja_JP','nl_NL','pt_BR','ru_RU','zh_CN'],
+    'locale_codes' => ['cs_CZ','de_DE','en_US','es_ES','fr_FR','ja_JP','nl_NL','pt_BR','ru_RU','zh_CN'],
+
+    'vendor' => realpath(__DIR__.'/../vendor'),
+    'default_currency' => env('DEFAULT_CURRENCY', 'CZK'),
 
     /*
     |--------------------------------------------------------------------------
@@ -177,8 +180,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\TranslationServiceProvider::class,
-//        App\Providers\LocalizedCoutryList::class,
+        App\Providers\NavigationServiceProvider::class,
         App\Providers\FilteredOrderedPaginatorServiceProvider::class,
     ],
 

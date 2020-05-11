@@ -4,6 +4,7 @@ use Illuminate\Database\Seeder;
 use App\Model\Order;
 use App\Model\Order\Item;
 use App\Model\Customer;
+use App\Model\Currency;
 use App\Model\Customer\Address as CAddress;
 use App\Model\Order\Address as OAddress;
 use App\Model\Order\Address\Type as OAddressType;
@@ -19,22 +20,24 @@ class OrderSeeder extends Seeder
     {
         /* @var $customer Customer  */
         $customers = Customer::all();
+        /* @var $customer Currency  */
+        $currency = Currency::query()->where('code', '=', 'CZK')->first();
 
-
-        factory(Order::class, 20)
-            ->create()
-            ->each(function (Order $o) use ($customers) {
-                $sum = 0;
+        factory(Order::class, 200)
+            ->make()
+            ->each(function (Order $o) use ($customers, $currency) {
                 /* @var $c Customer */
                 $c = $customers->random(1)->first();
-                factory(Item::class, 2)
-                    ->make()
-                    ->each(function (Item $item) use ($o, $sum) {
-                        $sum += $item->price;
-                        $o->items()->save($item);
-                    });
-                $o->price = $sum;
                 $o->customer_id = $c->id;
+                $o->currency_id = $currency->id;
+                $o->save();
+
+//                $sum = 0;
+                $items = factory(Item::class, 2)->make();//->each(function (Item $item) use ($o) {
+                $o->items()->saveMany($items);
+//                    $sum += $item->price;
+//                });
+                $o->price = $o->items->sum('price');
                 $o->save();
 
                 factory(OAddress::class)->create([

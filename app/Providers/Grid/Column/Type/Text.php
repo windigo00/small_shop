@@ -12,9 +12,4 @@ use App\Providers\Grid\Column\Type;
 class Text extends Type
 {
     protected $type_name = 'text';
-
-//    public function render($value, \Illuminate\Database\Eloquent\Model $row): ?string
-//    {
-//        return parent::render($value);
-//    }
 }

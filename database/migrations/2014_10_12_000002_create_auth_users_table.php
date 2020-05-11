@@ -3,6 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Model\Auth\UserAuthType;
+use App\Model\Auth\Type;
 
 class CreateAuthUsersTable extends Migration
 {
@@ -21,6 +23,16 @@ class CreateAuthUsersTable extends Migration
             $table->foreign('type_id')->references('id')->on('auth_types');
             $table->timestamps();
         });
+
+        $user = App\Model\User::create([
+            'name'  => 'admin',
+            'email' => 'vivian.hills@example.net',
+            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
+        ]);
+        UserAuthType::query()->insert([
+            'user_id'  => $user->id,
+            'type_id' => Type::query()->where('name', '=', Type::AUTH_TYPE_ADMIN)->first()->id
+        ]);
     }
 
     /**

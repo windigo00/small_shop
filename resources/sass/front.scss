@@ -1,0 +1,46 @@
+@import 'app';
+
+.title {
+    font-size: 84px;
+}
+
+.links > a {
+    color: #636b6f;
+    padding: 0 25px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: .1rem;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.m-b-md {
+    margin-bottom: 30px;
+}
+
+.product{
+    &.card {
+        height: 32em;
+        border: 0;
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .card-footer {
+            padding: 0;
+            border-top: 0;
+        }
+
+        .price {
+            position: relative;
+            top: 1.25em;
+            font-size: xx-large;
+            font-weight: lighter;
+        }
+    }
+}

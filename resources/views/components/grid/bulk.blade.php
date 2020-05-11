@@ -1,4 +1,4 @@
-<ul class="nav pagination justify-content-start">
+<ul class="nav pagination pagination-sm justify-content-start">
     <li class="page-item disabled" aria-disabled="true" v-show="isBulkSelected">
         <span class="page-link">@lang('Bulk actions')</span>
     </li>

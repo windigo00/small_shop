@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Model\Customer\Card as CCard;
+use Modules\Core\SmallShop\Customer\Model\Customer\Card as CCard;
 use App\Model\Card;
-use App\Model\Customer;
+use Modules\Core\SmallShop\Customer\Model\Customer;
 
 class CustomerCardSeeder extends Seeder
 {

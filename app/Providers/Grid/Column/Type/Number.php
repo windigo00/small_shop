@@ -12,9 +12,5 @@ use App\Providers\Grid\Column\Type;
 class Number extends Type
 {
     protected $type_name = 'number';
-
-//    public function render($value, \Illuminate\Database\Eloquent\Model $row): ?string
-//    {
-//        return parent::render($value);
-//    }
+    protected ?string $columnClass = 'text-right';
 }
