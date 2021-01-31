@@ -4,6 +4,7 @@ namespace Modules\Core\SmallShop\Catalog\Provider;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
+use Modules\Core\SmallShop\Catalog\Model\Product;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -15,6 +16,11 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'Modules\Core\SmallShop\Catalog\Http\Controller';
+
+    /**
+     *
+     * @var string
+     */
     protected $admin_namespace = 'Modules\Core\SmallShop\Catalog\Http\Controller\Admin';
 
     /**
@@ -24,10 +30,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Route::pattern('product:seo_name', '[a-z0-9_]+');
-//        Route::pattern('user_name', '[a-z0-9_!\*\.\[\]]+');
-
         parent::boot();
+        Route::pattern('id', '[0-9]+');
+        Route::pattern('product:seo_name', '[a-z0-9_]+');
     }
 
     /**

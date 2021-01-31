@@ -7,16 +7,21 @@ window.Vue = require('vue');
 require('./translation');
 
 import ModalForm from './components/ModalForm';
-import Grid from './components/Grid';
+import Grid from     './components/Grid';
+import Calendar from './components/Calendar';
 
+import moment from 'moment';
+moment.locale($(document).find('html').first().attr('lang'));
+/**
 const app = new Vue({
     el: '#app',
     components: {
         ModalForm,
+        Calendar,
+        Grid,
     },
 
     mixins: [
-        Grid
     ],
 
     data() {
@@ -32,8 +37,6 @@ const app = new Vue({
         window.addEventListener("beforeunload", () => {
             app.showMask();
         });
-
-
     },
 
     methods: {
@@ -52,4 +55,4 @@ const app = new Vue({
     }
 });
 
-
+*/

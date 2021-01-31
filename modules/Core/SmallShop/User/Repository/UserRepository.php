@@ -1,8 +1,7 @@
 <?php
 
-namespace Modules\Core\SmallShop\User\Repositories;
+namespace Modules\Core\SmallShop\User\Repository;
 
-use Illuminate\Database\Eloquent\Model;
 use Modules\Core\SmallShop\User\Model\User;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;

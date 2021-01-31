@@ -3,13 +3,13 @@
 namespace Modules\Core\SmallShop\Customer\Http\Controller;
 
 use Modules\Core\SmallShop\Customer\Model\Customer;
-use Illuminate\View\View;
+use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\View as ViewContract;
 
 class ProfileController extends Controller
 {
     /**
      * Create a new controller instance.
-     *
      */
     public function __construct()
     {
@@ -18,11 +18,8 @@ class ProfileController extends Controller
 
     /**
      * Show the profile for the given user.
-     *
-     * @param Customer $customer
-     * @return View
      */
-    public function show(Customer $customer): View
+    public function show(Customer $customer): ViewContract
     {
         return view('customer::profile', ['customer' => $customer]);
     }
@@ -32,7 +29,7 @@ class ProfileController extends Controller
      * @param Customer $customer
      * @return View
      */
-    public function index(Customer $customer): View
+    public function index(Customer $customer): ViewContract
     {
         return view('customer::profile.index', ['customer' => $customer]);
     }

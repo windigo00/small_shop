@@ -2,9 +2,6 @@
 namespace Modules\Core\SmallShop\Catalog\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
 use Modules\Core\SmallShop\Catalog\Model\Product;
 
 class ProductSeeder extends Seeder

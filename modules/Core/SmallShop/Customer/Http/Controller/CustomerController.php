@@ -12,11 +12,11 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use App\Model\Customer;
 
-class CoooustomerController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Login input validation rules
-     * @var array
+     * @var array<string, string>
      */
     protected $loginValidation = [
         'email'     => 'required|string',
@@ -24,7 +24,7 @@ class CoooustomerController extends Controller
     ];
     /**
      * Registration input validation rules
-     * @var array
+     * @var array<string, mixed>
      */
     protected $regValidation = [
         'first_name'=> ['required', 'string', 'max:255'],
@@ -47,8 +47,6 @@ class CoooustomerController extends Controller
     /**
      * Handle a login request to the application.
      *
-     * @param  Request $request
-     * @return JsonResponse
      * @throws ValidationException
      */
     public function login(Request $request): JsonResponse
@@ -66,8 +64,6 @@ class CoooustomerController extends Controller
 
     /**
      * Handle a auth check request to the application.
-     *
-     * @return JsonResponse
      */
     public function checkAuth(Request $request): JsonResponse
     {
@@ -87,8 +83,6 @@ class CoooustomerController extends Controller
 
     /**
      * Handle a logout request to the application.
-     *
-     * @return \Illuminate\Http\JsonResponse
      */
     public function logout(Request $request): JsonResponse
     {
@@ -106,9 +100,6 @@ class CoooustomerController extends Controller
 
     /**
      * Handle a registration request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function register(Request $request): JsonResponse
     {
@@ -127,8 +118,6 @@ class CoooustomerController extends Controller
      * Handle user list request.
      *
      * @throws ValidationException
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function grid(Request $request): JsonResponse
     {
@@ -152,8 +141,6 @@ class CoooustomerController extends Controller
 
     /**
      * Get the guard to be used during authentication.
-     *
-     * @return \Illuminate\Contracts\Auth\StatefulGuard
      */
     protected function guard(): \Illuminate\Contracts\Auth\StatefulGuard
     {

@@ -3,10 +3,9 @@ namespace Modules\Core\SmallShop\System\Http\Controller\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\LocaleRepository;
+use Modules\Core\SmallShop\System\Repository\LocaleRepository;
 use App\Providers\Grid\Container as GridContainer;
 use Modules\Core\SmallShop\System\Provider\Grid\Column\Model;
-use App\Model\Locale;
 use Illuminate\Contracts\Support\Renderable;
 
 /**
@@ -23,8 +22,11 @@ class LocaleController extends Controller
      */
     public function index(Request $request, LocaleRepository $repo, Model\Locale $columns): Renderable
     {
-//        dump(app('config'));
-        return view('system::admin.system.locale.index', [
+        $translator  = app('translator');
+//        $c  = array_combine(config('app.enabled_locale'), config('app.locale_codes'));
+//        dump($c);
+//        $columns->setLanguages();
+        return view('system::admin.locale.index', [
             'locale_grid' => app(GridContainer::class, [
                 'request'    => $request,
                 'repository' => $repo,

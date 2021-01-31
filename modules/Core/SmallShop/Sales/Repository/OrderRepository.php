@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\SmallShop\Sales\Repositories;
+namespace Modules\Core\SmallShop\Sales\Repository;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Core\SmallShop\Sales\Model\Order;

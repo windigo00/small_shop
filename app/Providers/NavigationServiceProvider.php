@@ -18,7 +18,7 @@ class NavigationServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('navigation', function ($app) {
-            return new Navigation\Navigation;
+            return new Navigation\Navigation('', '');
         });
     }
 

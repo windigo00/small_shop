@@ -17,6 +17,6 @@ class ConfigController extends Controller
      */
     public function index()
     {
-        return view('system::admin.system.config.index');
+        return view('system::admin.config.index');
     }
 }

@@ -1,5 +1,5 @@
 <?php
-namespace Modules\Core\SmallShop\System\Providers\Translation;
+namespace Modules\Core\SmallShop\System\Provider\Translation;
 
 /**
  * Description of CountryList

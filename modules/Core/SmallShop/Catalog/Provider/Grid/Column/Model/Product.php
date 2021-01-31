@@ -3,7 +3,6 @@ namespace Modules\Core\SmallShop\Catalog\Provider\Grid\Column\Model;
 
 use App\Providers\Grid\Columns;
 use App\Providers\Grid\Column\Type;
-use Illuminate\Database\Eloquent;
 use Modules\Core\SmallShop\Catalog\Model\Product as ProductModel;
 
 /**
@@ -15,7 +14,7 @@ class Product extends Columns
 {
     public function initColumns(): void
     {
-        $deleteQuestion = __('Are you sure?');
+        $deleteQuestion = __('Are you sure?').'';
         $this->items = [
             app(Type\BulkAction::class, ['name' => 'bulk_action', 'enabled_actions' => ['edit', 'delete']]),
             app(Type\ID::class, ['name' => 'id', 'label' => '#', 'columnClass' => 'slim']),
@@ -42,7 +41,7 @@ class Product extends Columns
                         'color' => 'danger',
                         'icon' => 'trash',
                         'route' => ['route_name' => 'admin.catalog.products.destroy', 'attrs' => ['product']],
-                        'confirm' => function (Eloquent\Model $item) use ($deleteQuestion) {
+                        'confirm' => function (ProductModel $item) use ($deleteQuestion) {
                             return "deleteItem('{$deleteQuestion}', {$item->id}, 'confirmForm', \$event)";
                         }
                     ]

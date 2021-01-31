@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\SmallShop\Customer\Repositories;
+namespace Modules\Core\SmallShop\Customer\Repository;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Core\SmallShop\Customer\Model\Card;

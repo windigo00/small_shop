@@ -1,18 +1,23 @@
 @php
-$hasItems = isset($items) && !empty($items);
+$hasItems = $item->hasChildren();
+$uri = $item->getUri();
+$testUri = str_replace('.', '/', $uri);
+if (strpos($uri, '.') !== false) {
+    $testUri = str_replace('/index', '', $testUri);
+}
 @endphp
 <a
-    class="{{ $class }} @if(strpos(Route::current()->uri, $uri) !== false) active @endif @if($hasItems) dropdown-toggle @endif"
+    class="{{ $class }} @if(strpos(Route::current()->uri, $testUri) !== false) active @endif @if($hasItems) dropdown-toggle @endif"
     @if($hasItems) data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
     @else href="{{ strpos($uri, '/') !== false ? url($uri) : route($uri) }}" @endif
 >
-    {{ __($title) }}
+    {{ __($item->getTitle()) }}
 </a>
 
 @if($hasItems)
 <div class="dropdown-menu">
-    @foreach($items as $item)
-    @include('components.nav.link', array_merge(['class' => 'dropdown-item', 'items' => []], $item))
+    @foreach($item->getItems() as $item)
+    @include('components.nav.link', ['class' => 'dropdown-item', 'item' => $item])
     @endforeach
 </div>
 @endif

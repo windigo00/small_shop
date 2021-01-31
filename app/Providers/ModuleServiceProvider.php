@@ -41,7 +41,7 @@ abstract class ModuleServiceProvider extends ServiceProvider
         ]);
         $this->loadTranslationsFrom(realpath($module_root . 'i18n'), $this->module_name);
         $this->loadViewsFrom($module_root . 'resources/views', $this->module_name);
-
+        
         $this->app->singleton('module.'.$this->module_name, function ($app) {
 
         });

@@ -17,17 +17,10 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        $this->app['navigation']->addItem([
-            'uri' => 'admin/catalog',
-            'title' => 'Catalog',
-            'items' => [
-                [
-                    'uri' => 'admin.catalog.products.index',
-                    'title' => 'Products'
-                ]
-            ]
-        ]);
+        $nav = $this->app['navigation'];
+        $item = $nav->addItem('catalog', 'admin/catalog', 'Catalog');
+        $item->addItem('products', 'admin.catalog.products.index', 'Products');
+        
     }
 
 }

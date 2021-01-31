@@ -1,0 +1,1 @@
+<calendar id="{{ $name }}" date="{{ $time['now']->format('r') }}" month="{{ $time['month_start']->format('r') }}" day-component="task-list" routes=@json($routes)></calendar>

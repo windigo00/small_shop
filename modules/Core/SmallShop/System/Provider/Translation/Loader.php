@@ -1,7 +1,8 @@
 <?php
-namespace Modules\Core\SmallShop\System\Providers\Translation;
+namespace Modules\Core\SmallShop\System\Provider\Translation;
 
 use Illuminate\Filesystem\Filesystem;
+use Modules\Core\SmallShop\System\Services\LanguageService;
 
 /**
  * Description of Loader
@@ -11,15 +12,12 @@ use Illuminate\Filesystem\Filesystem;
 class Loader extends \Illuminate\Translation\FileLoader
 {
 
-    protected $enabled_locales;
-    protected $locale_codes;
+    protected LanguageService $languageService;
 
-
-    public function __construct(Filesystem $files, string $path, array $enabled_locales = [], array $locale_codes = [])
+    public function __construct(Filesystem $files, $path)
     {
         parent::__construct($files, $path);
-        $this->enabled_locales = $enabled_locales;
-        $this->locale_codes = $locale_codes;
+        $this->languageService = app('translation.languages');
     }
 
     protected function loadFile(string $file_path): array
@@ -106,7 +104,8 @@ class Loader extends \Illuminate\Translation\FileLoader
      * @param string $locale
      * @return string
      */
-    protected function getCorrectLocaleName(string $locale): string {
-        return $this->locale_codes[array_search($locale, $this->enabled_locales)];
+    protected function getCorrectLocaleName(string $locale): string
+    {
+        return $this->languageService->getLanguageByCode($locale)->code;
     }
 }

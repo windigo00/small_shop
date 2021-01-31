@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\SmallShop\Customer\Providers\Grid\Column\Model;
+namespace Modules\Core\SmallShop\Customer\Provider\Grid\Column\Model;
 
 use App\Providers\Grid\Columns;
 use App\Providers\Grid\Column\Type;

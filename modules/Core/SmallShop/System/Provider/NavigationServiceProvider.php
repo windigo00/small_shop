@@ -17,20 +17,10 @@ class NavigationServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->app['navigation']->addItem([
-            'uri' => 'admin/system',
-            'title' => 'System',
-            'items' => [
-                [
-                    'uri' => 'admin.system.settings.index',
-                    'title' => 'Settings'
-                ],
-                [
-                    'uri' => 'admin.system.locale.index',
-                    'title' => 'Locale'
-                ],
-            ]
-        ]);
+        $nav = $this->app['navigation'];
+        $item = $nav->addItem('system', 'admin/system', 'System');
+        $item->addItem('settings', 'admin.system.settings.index', 'Settings', 10);
+        $item->addItem('locale', 'admin.system.locale.index', 'Locale', 20);
     }
 
 }

@@ -7,7 +7,7 @@
 
 @section('menu')
     @include('components.nav', ['links' => 'user::admin.auth.components.links'])
-    @include('admin.components.nav', ['links' => app('navigation')->getItems()])
+    <x-navigation template="admin.components.nav" :links="app('navigation')->getItems()"></x-navigation>
 @endsection
 
 @section('content')

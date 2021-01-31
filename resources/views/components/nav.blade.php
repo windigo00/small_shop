@@ -12,9 +12,11 @@
             <ul class="navbar-nav ml-auto">
 
                 <!-- Right Side Of Navbar -->
-                @include('components.language')
-                
-                @include($links)
+                <li class="nav-item dropdown">
+                    <x-system-language-selector class="nav-link"></x-system-language-selector>
+                </li>
+
+                @include('user::admin.auth.components.links')
 
             </ul>
         </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Core\SmallShop\System\Providers;
+namespace Modules\Core\SmallShop\System\Provider;
 
 //use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\ServiceProvider;

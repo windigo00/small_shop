@@ -36,16 +36,17 @@ class Locale extends Columns
 //            ]),
         ];
 
-        $locales = config('app.enabled_locale');
-        $locale_codes = config('app.locale_codes');
 
+    }
+
+    public function setLanguages(array $locales): void
+    {
         foreach($locales as $idx => $locale) {
             $this->items[] = app(Type\Text::class, [
-                'name' => 'col_' . $locale,
-                'label' => '<span class="flag-icon flag-icon-'. strtolower(\Locale::getRegion($locale_codes[$idx])) .'"></span>',
-                'selectColumn' => "(SELECT GROUP_CONCAT(DISTINCT `value` SEPARATOR '--*--') from `locales_{$locale}` WHERE `locales_{$locale}`.`key_id` = `locales`.`id` GROUP BY `locales_{$locale}`.`key_id`)",
+                'name' => 'col_' . $idx,
+                'label' => '<span class="flag-icon flag-icon-'. strtolower(\Locale::getRegion($locale)) .'"></span>',
+                'selectColumn' => "(SELECT GROUP_CONCAT(DISTINCT `value` SEPARATOR '--*--') from `locales_{$idx}` WHERE `locales_{$idx}`.`key_id` = `locales`.`id` GROUP BY `locales_{$idx}`.`key_id`)",
             ]);
         }
-
     }
 }

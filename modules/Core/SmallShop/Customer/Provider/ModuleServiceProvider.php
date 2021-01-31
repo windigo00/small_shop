@@ -1,7 +1,5 @@
 <?php
-
 namespace Modules\Core\SmallShop\Customer\Provider;
-
 
 class ModuleServiceProvider extends \App\Providers\ModuleServiceProvider
 {

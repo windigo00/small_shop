@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Factories;
+
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
 use Modules\Core\SmallShop\Catalog\Model\Product;

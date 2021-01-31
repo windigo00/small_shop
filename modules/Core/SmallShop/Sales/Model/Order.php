@@ -30,11 +30,6 @@ use Modules\Core\SmallShop\System\Model\Currency;
  */
 class Order extends Model
 {
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
     protected $table = 'orders';
 
     /**

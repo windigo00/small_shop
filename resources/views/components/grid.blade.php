@@ -1,9 +1,10 @@
 @section('scripts')
     @parent
     <script>
-        window._{{ $name }}_data = @json($container->getColumnData());
+//        window._{{ $name }}_data = @json($container->getColumnData());
     </script>
 @endsection
+{{--
 <filters
     ref="filters"
     :items="filterItems"
@@ -13,7 +14,7 @@
     @move-filter="moveFilter"
 >
 </filters>
-
+--}}
 <form id="tbl">
     <div class="table-responsive-sm">
         <table class="table table-striped table-bordered table-hover table-sm" id="{{ $name }}">
@@ -25,7 +26,7 @@
                     @include('components.grid.row', ['columns' => $container->getColumns(), 'row' => $item, 'actions' => $container->getActions()])
                 @empty
                 <tr>
-                    <th scope="row" colspan="{{ count($container->getColumns()) }}">No Items</th>
+                    <th scope="row" colspan="{{ count($container->getColumns()) }}">{{ __('No Items') }}</th>
                 </tr>
                 @endforelse
             </tbody>

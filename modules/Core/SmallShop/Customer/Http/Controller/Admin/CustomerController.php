@@ -4,7 +4,7 @@ namespace Modules\Core\SmallShop\Customer\Http\Controller\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Repositories\CustomerRepository;
+use Modules\Core\SmallShop\Customer\Repository\CustomerRepository;
 use App\Providers\Grid\Container as GridContainer;
 use Modules\Core\SmallShop\Customer\Provider\Grid\Column\Model;
 use Illuminate\Contracts\Support\Renderable;
