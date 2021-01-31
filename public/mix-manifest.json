@@ -1,4 +1,6 @@
 {
+    "/js/Core/SmallShop/Business/index.js": "/js/Core/SmallShop/Business/index.js",
+    "/js/Core/SmallShop/Catalog/catalog.js": "/js/Core/SmallShop/Catalog/catalog.js",
     "/js/admin.js": "/js/admin.js",
     "/js/app.js": "/js/app.js",
     "/css/front.css": "/css/front.css",
