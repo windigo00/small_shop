@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "flag-icon-css": "^3.5.0",
-        "moment": "^2.29.1",
+        "moment": "^2.29.2",
         "vue-masked-input": "^0.5.2"
     }
 }
